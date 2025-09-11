@@ -56,7 +56,7 @@
     main.wrap{display:block;padding:18px 16px}
 
     /* News / Tabs */
-    .news{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+    .news{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
     .news .head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border)}
     .news .head h2{font-size:18px;margin:0}
     .joke-note{font-size:12px;color:#999;margin-left:8px}
@@ -77,18 +77,19 @@
     .time{font-size:12px;color:#888;margin-left:auto}
     .more{padding:10px 14px;background:#fff}
 
+    /* Weather grid */
+    .card{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
+    .card h3{font-size:18px;margin:0;padding:12px 16px;border-bottom:1px solid var(--border)}
+    .card .body{padding:12px 16px}
+    .weather-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .wcell{background:#f9fafb;border:1px solid #eee;padding:12px;border-radius:8px;min-height:120px}
+    .wcell h4{margin:0 0 8px;font-size:16px}
+    .wcell p{margin:0;font-size:14px;color:#333}
+    .note{font-size:12px;color:#999;margin-top:8px}
+
     /* Sidebar */
     .sidebar{display:flex;flex-direction:column;gap:16px}
-    .card{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden}
-    .card h3{font-size:16px;margin:0;padding:10px 14px;border-bottom:1px solid var(--border)}
-    .card .body{padding:12px 14px}
-    .login-box .btn{display:block;text-align:center;width:100%;padding:10px;background:var(--brand);color:#fff;border-radius:6px;font-weight:700}
-    .login-box .links{display:flex;justify-content:space-between;font-size:12px;margin-top:8px}
-
-    .weather .city-select{display:flex;gap:6px;margin-bottom:8px}
-    .weather .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .weather .cell{padding:8px;background:#fafafa;border-radius:6px;text-align:center;font-size:12px}
-    .weather .big{font-size:18px;font-weight:700}
+    .card h3.small{font-size:16px;margin:0;padding:10px 14px;border-bottom:1px solid var(--border)}
 
     /* Trending ranking closer to Yahoo */
     .trend ol{margin:0;padding:0}
@@ -109,21 +110,12 @@
     /* Footer */
     footer{border-top:1px solid var(--border);background:#fff;color:#666}
     .legal{font-size:12px;text-align:center;color:#888;padding:14px}
-
-    /* smallネタ注記 */
     .small-note{font-size:11px;color:#999;margin-left:6px;vertical-align:middle}
 
     /* Responsive */
-    @media (max-width:980px){
-      main.wrap{grid-template-columns:1fr}
-      .svc-grid{grid-template-columns:repeat(3,1fr)}
-    }
-    @media (max-width:560px){
-      .masthead{flex-direction:column;align-items:stretch}
-      .brand{font-size:30px}
-      .g-nav{flex-wrap:wrap}
-      .svc-grid{grid-template-columns:repeat(2,1fr)}
-    }
+    @media (max-width:980px){.weather-grid{grid-template-columns:repeat(2,1fr)} .svc-grid{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:560px){.weather-grid{grid-template-columns:1fr} .masthead{flex-direction:column;align-items:stretch} .brand{font-size:30px} .g-nav{flex-wrap:wrap} .svc-grid{grid-template-columns:repeat(2,1fr)}}
+
     /* ページ切り替え（単一HTML内） */
     .page{display:none}
     .page.active{display:block}
@@ -149,7 +141,7 @@
   <header>
     <div class="masthead wrap">
       <div class="brand" aria-label="Yanoo! JAPAN ロゴ">Yanoo! <span class="jp">JAPAN</span></div>
-      <form class="search" role="search" onsubmit="event.preventDefault(); alert('これはダミー検索です\n\n入力: ' + (document.getElementById('q').value || '（未入力）'));">
+      <form class="search" role="search" onsubmit="event.preventDefault(); alert('これはダミー検索です\n\n入力: ' + (document.getElementById('q').value || '（未入力）')) ;">
         <div class="search-row">
           <label class="visually-hidden" for="type">検索種別</label>
           <select id="type" aria-label="検索種別">
@@ -210,7 +202,8 @@
 
         <div class="panel active" data-panel="top" role="tabpanel">
           <ul class="news-list" id="news-top">
-            <!-- 最新10件（既存の最初の10件は削除済み） -->
+
+            <!-- 最新10件のみ表示（以前の最初の10件は削除済み） -->
 
             <li>
               <div class="news-item">
@@ -285,7 +278,6 @@
           </ul>
         </div>
 
-        <!-- 他パネル（空） -->
         <div class="panel" data-panel="dom" role="tabpanel"><ul class="news-list" id="news-dom"></ul></div>
         <div class="panel" data-panel="int" role="tabpanel"><ul class="news-list" id="news-int"></ul></div>
         <div class="panel" data-panel="bus" role="tabpanel"><ul class="news-list" id="news-bus"></ul></div>
@@ -296,27 +288,83 @@
       </div>
     </section>
 
-    <!-- 他ページ（省略しないで残してあります） -->
+    <!-- ページ: 天気（省略せず全て記載） -->
     <section id="page-weather" class="page" aria-labelledby="weather-title">
-      <h2 id="weather-title" class="page-title">天気</h2>
       <div class="card">
+        <h3 id="weather-title">ハチャメチャ全国天気予報 <small style="color:#999">（ネタ）</small></h3>
         <div class="body">
-          <form class="form-row" onsubmit="event.preventDefault();">
-            <input type="text" placeholder="都市名を入力（例: 東京）" aria-label="都市名" />
-            <button type="submit">検索</button>
-          </form>
-          <div id="weather-result"><!-- ここに結果を表示 --></div>
+          <div class="weather-grid">
+
+            <div class="wcell">
+              <h4>北海道</h4>
+              <p>雪ではなくシロクマが降る見込み。交通機関に大きな影響が出る恐れがあります。</p>
+              <p class="note">対策：屋外ではクマよけの鈴よりも魚肉ソーセージの備蓄をおすすめします。避難所では暖かい毛布とホットミルクを用意してください。</p>
+            </div>
+
+            <div class="wcell">
+              <h4>青森</h4>
+              <p>りんご型の雹が落下します。大小さまざまな形のりんごが地面を彩るでしょう。収穫シーズンには朗報か災難かで議論になります。</p>
+              <p class="note">対策：屋外の車や農作物はネットやカバーで保護してください。落ちたりんご型雹は食用に適するか農協の判断を仰いでください。</p>
+            </div>
+
+            <div class="wcell">
+              <h4>東京</h4>
+              <p>お昼から巨大なWi‑Fi電波が空を覆う予報。電波は強くスマホの接続は快適になりますが、電磁的な干渉で一部電子傘（デジタル傘）が誤作動する恐れがあり、傘の携帯を推奨します。</p>
+              <p class="note">対策：予備バッテリーよりも金属製の傘や帽子が安心です。屋外イベントは電波利用の整理を。</p>
+            </div>
+
+            <div class="wcell">
+              <h4>名古屋</h4>
+              <p>みそカツの香りを伴う熱風が流れ込みます。夕方にはソースのにわか雨が予想され、道行く人々は一時的に美味しそうな香りに包まれるでしょう。</p>
+              <p class="note">対策：洋服に匂いが付きやすいので予備のシャツやエプロンがあると安心です。食欲増進に注意。</p>
+            </div>
+
+            <div class="wcell">
+              <h4>大阪</h4>
+              <p>突発的に「たこ焼きの粉雪」が降る予報。道頓堀周辺では粉まみれの観光客が続出し、歩行が難しくなる地域があります。</p>
+              <p class="note">対策：口や目に粉が入らないようマスク、ゴーグルを準備。粉は食品由来である場合が多く、清掃は市の指示に従ってください。</p>
+            </div>
+
+            <div class="wcell">
+              <h4>京都</h4>
+              <p>金閣寺の屋根が太陽光を強く反射し、周辺で“金色のゲリラ豪雨”が発生する模様。光の反射が水滴に屈折して一帯がキラキラ輝きます。</p>
+              <p class="note">対策：サングラスや反射対策の帽子を用意。光が強い時間帯は屋外活動を控えるのが無難です。</p>
+            </div>
+
+            <div class="wcell">
+              <h4>福岡</h4>
+              <p>屋台ラーメンのスープ前線が停滞し、午後は替え玉の吹雪に注意。通行人がスープに遭遇する率が上がります。</p>
+              <p class="note">対策：替え玉対策としてタオルや替えの下着を携行すると安心。屋台運営者は蓋付きの容器で対応を。</p>
+            </div>
+
+            <div class="wcell">
+              <h4>鹿児島</h4>
+              <p>桜島の火山灰が突如カラフルな紙吹雪に変化。通りは祭りのようなお祝いムードに包まれる見込みです。</p>
+              <p class="note">対策：紙吹雪は目につまりやすいので眼鏡やマスク着用を推奨。色付きの灰は洗濯で落ちにくい可能性あり。</p>
+            </div>
+
+            <div class="wcell">
+              <h4>沖縄</h4>
+              <p>サンゴ礁から虹が直接噴出し、観光客は虹シャワーを浴び放題。ビーチは一時的にカラフルなアーチで埋め尽くされます。</p>
+              <p class="note">対策：水中カメラや防水機材を用意して、虹との記念撮影をお楽しみください。サンゴ生態系への影響は短期的に観察が必要です。</p>
+            </div>
+
+          </div>
+
+          <p style="margin-top:12px;color:#999;">※この天気予報はフィクション（ネタ）です。実際の天候とは関係ありません。現実の気象情報は気象庁など公式発表を参照してください。</p>
         </div>
       </div>
     </section>
 
+    <!-- ページ: スポーツ -->
     <section id="page-sports" class="page" aria-labelledby="sports-title">
-      <h2 id="sports-title" class="page-title">スポーツ</h2>
-      <div class="card"><div class="body" id="sports-body"><!-- 競技・リーグ別のUIを配置 --></div></div>
+      <h3 id="sports-title" class="page-title">スポーツ</h3>
+      <div class="card"><div class="body" id="sports-body"><!-- 競技・リーグ別のUIを配置できます --></div></div>
     </section>
 
+    <!-- ページ: ファイナンス -->
     <section id="page-finance" class="page" aria-labelledby="finance-title">
-      <h2 id="finance-title" class="page-title">ファイナンス</h2>
+      <h3 id="finance-title" class="page-title">ファイナンス</h3>
       <div class="card"><div class="body">
         <form class="form-row" onsubmit="event.preventDefault();">
           <input type="text" placeholder="銘柄/為替を入力（例: 9984, USD/JPY）" aria-label="ファイナンス検索" />
@@ -326,13 +374,15 @@
       </div></div>
     </section>
 
+    <!-- ページ: テレビ -->
     <section id="page-tv" class="page" aria-labelledby="tv-title">
-      <h2 id="tv-title" class="page-title">テレビ</h2>
+      <h3 id="tv-title" class="page-title">テレビ</h3>
       <div class="card"><div class="body" id="tv-list"><!-- 番組表やおすすめ --></div></div>
     </section>
 
+    <!-- ページ: 地図 -->
     <section id="page-maps" class="page" aria-labelledby="maps-title">
-      <h2 id="maps-title" class="page-title">地図</h2>
+      <h3 id="maps-title" class="page-title">地図</h3>
       <div class="card"><div class="body">
         <form class="form-row" onsubmit="event.preventDefault();">
           <input type="text" placeholder="場所や住所を入力" aria-label="地図検索" />
@@ -342,8 +392,9 @@
       </div></div>
     </section>
 
+    <!-- ページ: 路線 -->
     <section id="page-transit" class="page" aria-labelledby="transit-title">
-      <h2 id="transit-title" class="page-title">路線</h2>
+      <h3 id="transit-title" class="page-title">路線</h3>
       <div class="card"><div class="body">
         <form class="form-col" onsubmit="event.preventDefault();">
           <input type="text" placeholder="出発（駅名）" aria-label="出発駅" />
@@ -357,8 +408,9 @@
       </div></div>
     </section>
 
+    <!-- ページ: メール -->
     <section id="page-mail" class="page" aria-labelledby="mail-title">
-      <h2 id="mail-title" class="page-title">メール</h2>
+      <h3 id="mail-title" class="page-title">メール</h3>
       <div class="card"><div class="body">
         <form class="form-col" onsubmit="event.preventDefault();">
           <input type="email" placeholder="Yanoo! ID（メール）" aria-label="メールアドレス" />
@@ -368,8 +420,9 @@
       </div></div>
     </section>
 
+    <!-- ページ: ショッピング -->
     <section id="page-shopping" class="page" aria-labelledby="shopping-title">
-      <h2 id="shopping-title" class="page-title">ショッピング</h2>
+      <h3 id="shopping-title" class="page-title">ショッピング</h3>
       <div class="card"><div class="body">
         <form class="form-row" onsubmit="event.preventDefault();">
           <input type="text" placeholder="商品名を入力" aria-label="商品検索" />
@@ -379,8 +432,9 @@
       </div></div>
     </section>
 
+    <!-- ページ: オークション -->
     <section id="page-auction" class="page" aria-labelledby="auction-title">
-      <h2 id="auction-title" class="page-title">オークション</h2>
+      <h3 id="auction-title" class="page-title">オークション</h3>
       <div class="card"><div class="body">
         <form class="form-row" onsubmit="event.preventDefault();">
           <input type="text" placeholder="キーワード" aria-label="オークション検索" />
@@ -390,8 +444,9 @@
       </div></div>
     </section>
 
+    <!-- ページ: トラベル -->
     <section id="page-travel" class="page" aria-labelledby="travel-title">
-      <h2 id="travel-title" class="page-title">トラベル</h2>
+      <h3 id="travel-title" class="page-title">トラベル</h3>
       <div class="card"><div class="body">
         <form class="form-row" onsubmit="event.preventDefault();">
           <input type="text" placeholder="行き先・ホテル名など" aria-label="旅行検索" />
