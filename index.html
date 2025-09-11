@@ -1,13 +1,420 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <title>yanoo.f5.si ミラー</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yanoo! JAPAN</title>
+  <meta name="description" content="Yanoo! JAPAN は Yahoo! JAPAN 風のデモページです。実在のサービス・画像・商標は使用していません。"/>
   <style>
-    body, html { margin:0; padding:0; height:100%; overflow:hidden; }
+    :root{
+      --brand:#e60012; /* Brand red */
+      --ink:#111;
+      --ink-2:#555;
+      --link:#0645ad;
+      --bg:#ffffff;
+      --ui:#f7f7f7;
+      --border:#e5e5e5;
+      --hover:#f0f0f0;
+      --up:#128a0c; --down:#b30000;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,Meiryo,"Yu Gothic","Hiragino Kaku Gothic ProN",system-ui,sans-serif;line-height:1.45}
+    a{color:var(--ink);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+    /* Topbar */
+    .topbar{display:flex;gap:12px;align-items:center;justify-content:flex-end;height:36px;font-size:13px;color:var(--ink-2)}
+    .topbar a{color:inherit}
+    .topbar .sep{color:#ddd}
+    .topbar .strong{font-weight:700}
+
+    /* Header / Masthead */
+    header{background:#fff;border-bottom:1px solid var(--border)}
+    .masthead{display:flex;align-items:center;gap:20px;padding:10px 0 12px}
+    .brand{font-family:"Times New Roman",Times,serif;font-weight:700;font-size:36px;color:var(--brand);letter-spacing:.3px}
+    .brand .jp{font-size:14px;color:#888;margin-left:4px;letter-spacing:1.1px}
+
+    /* Search */
+    .search{flex:1;display:flex;flex-direction:column;gap:6px}
+    .search-row{display:flex;width:100%}
+    .search select{border:1px solid #cfcfcf;border-right:none;padding:10px 10px;background:#fff;font-size:15px;border-top-left-radius:8px;border-bottom-left-radius:8px}
+    .search input[type="text"]{flex:1;border:1px solid #cfcfcf;border-left:none;padding:10px 12px;font-size:16px}
+    .search button{border:1px solid var(--brand);border-left:none;background:var(--brand);color:#fff;padding:10px 18px;font-size:16px;cursor:pointer;border-top-right-radius:8px;border-bottom-right-radius:8px}
+    .search button:hover{filter:brightness(.95)}
+    .q-links{font-size:12px;color:#777}
+    .q-links a{color:#777;margin-right:10px}
+
+    /* Global nav (closer to Yahoo! 構成) */
+    .g-nav{display:flex;gap:16px;padding:8px 0;background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);font-size:14px}
+    .g-nav a{color:#333;padding:6px 0;position:relative}
+    .g-nav a:hover{color:#000}
+    .g-nav a.active::after,.g-nav a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:3px;background:var(--brand)}
+
+    /* Layout */
+    main.wrap{display:block;padding:18px 16px}
+
+    /* News / Tabs */
+    .news{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+    .news .head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border)}
+    .news .head h2{font-size:18px;margin:0}
+    .tabs{display:flex;gap:0}
+    .tabs button{border:none;background:#fff;padding:10px 12px;font-size:14px;cursor:pointer;border-bottom:3px solid transparent}
+    .tabs button:hover{background:var(--ui)}
+    .tabs button.active{border-bottom-color:var(--brand);font-weight:700}
+
+    .panel{display:none;padding:8px 14px 12px}
+    .panel.active{display:block}
+    .news-list{list-style:none;margin:0;padding:0}
+    .news-list li{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #f2f2f2}
+    .news-list li:last-child{border-bottom:none}
+    .badge{display:inline-block;min-width:42px;text-align:center;font-size:11px;padding:2px 6px;border-radius:12px;background:#fff1f1;color:var(--brand);border:1px solid #ffd1d6}
+    .news-list a{color:#111;line-height:1.35}
+    .news-list a.new::after{content:"NEW";display:inline-block;margin-left:6px;font-size:10px;color:#fff;background:#ffb300;border-radius:3px;padding:1px 4px}
+    .time{font-size:12px;color:#888;margin-left:auto}
+    .more{padding:10px 14px;background:#fff}
+
+    /* Sidebar */
+    .sidebar{display:flex;flex-direction:column;gap:16px}
+    .card{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+    .card h3{font-size:16px;margin:0;padding:10px 14px;border-bottom:1px solid var(--border)}
+    .card .body{padding:12px 14px}
+    .login-box .btn{display:block;text-align:center;width:100%;padding:10px;background:var(--brand);color:#fff;border-radius:6px;font-weight:700}
+    .login-box .links{display:flex;justify-content:space-between;font-size:12px;margin-top:8px}
+
+    .weather .city-select{display:flex;gap:6px;margin-bottom:8px}
+    .weather .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .weather .cell{padding:8px;background:#fafafa;border-radius:6px;text-align:center;font-size:12px}
+    .weather .big{font-size:18px;font-weight:700}
+
+    /* Trending ranking closer to Yahoo */
+    .trend ol{margin:0;padding:0}
+    .trend li{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f2f2f2}
+    .trend .num{width:22px;height:22px;border-radius:50%;background:#f0f0f0;display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:#555}
+    .trend .word{flex:1}
+    .trend .chg.up{color:var(--up)}
+    .trend .chg.down{color:var(--down)}
+
+    /* Services grid */
+    .services{margin:6px auto 24px}
+    .services h3{font-size:16px;margin:0 0 8px}
+    .svc-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+    .svc{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px;display:flex;align-items:center;gap:10px}
+    .svc .ico{width:28px;height:28px;border-radius:8px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-weight:700}
+    .svc strong{font-size:14px}
+
+    /* Footer */
+    footer{border-top:1px solid var(--border);background:#fff;color:#666}
+    .f-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:18px 16px}
+    .f-wrap ul{list-style:none;margin:0;padding:0;font-size:13px}
+    .f-wrap li{padding:6px 0}
+    .legal{font-size:12px;text-align:center;color:#888;padding:14px}
+
+    /* Responsive */
+    @media (max-width:980px){
+      main.wrap{grid-template-columns:1fr}
+      .svc-grid{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (max-width:560px){
+      .masthead{flex-direction:column;align-items:stretch}
+      .brand{font-size:30px}
+      .g-nav{flex-wrap:wrap}
+      .svc-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    /* ページ切り替え（単一HTML内） */
+    .page{display:none}
+    .page.active{display:block}
+    .page-title{font-size:18px;margin:0 0 10px}
+    .form-row{display:flex;gap:8px;align-items:center}
+    .form-col{display:flex;flex-direction:column;gap:8px}
+    .form-row input,.form-col input{flex:1;border:1px solid #cfcfcf;padding:10px 12px;font-size:14px}
+    .form-row button,.form-col button{border:1px solid var(--brand);background:var(--brand);color:#fff;padding:10px 16px;border-radius:6px;cursor:pointer}
+    .map-placeholder{height:320px;background:#fafafa;border:1px dashed #ddd;border-radius:8px}
+    /* 共通ノート（全ページに表示） */
+    .site-note{margin:0 auto;max-width:1180px;padding:8px 16px;color:#333;background:#fff7e6;border-top:1px solid #ffe0b3;border-bottom:1px solid #ffe0b3;font-size:14px}
   </style>
 </head>
 <body>
-  <iframe src="https://harudora.com/yanoo" style="border:none; width:100%; height:100%;"></iframe>
+  <!-- Topbar -->
+  <div class="topbar wrap" aria-label="ユーティリティバー">
+    <a href="#" class="strong">ログイン</a><span class="sep">｜</span>
+    <a href="#">ID新規取得</a><span class="sep">｜</span>
+    <a href="#">ヘルプ</a><span class="sep">｜</span>
+    <a href="#">設定</a><span class="sep">｜</span>
+    <a href="#">日本語</a>
+  </div>
+
+  <header>
+    <div class="masthead wrap">
+      <div class="brand" aria-label="Yanoo! JAPAN ロゴ">Yanoo! <span class="jp">JAPAN</span></div>
+      <form class="search" role="search" onsubmit="event.preventDefault(); alert('これはダミー検索です\n\n入力: ' + (document.getElementById('q').value || '（未入力）'));">
+        <div class="search-row">
+          <label class="visually-hidden" for="type">検索種別</label>
+          <select id="type" aria-label="検索種別">
+            <option>ウェブ</option>
+            <option>ニュース</option>
+            <option>画像</option>
+            <option>動画</option>
+            <option>知恵袋</option>
+          </select>
+          <label class="visually-hidden" for="q">検索ワード</label>
+          <input id="q" type="text" placeholder="キーワードを入力" />
+          <button type="submit" aria-label="検索">検索</button>
+        </div>
+        <div class="q-links" aria-label="クイックリンク">
+          <a href="#">詳細検索</a>
+          <a href="#">検索設定</a>
+          <a href="#">安全検索</a>
+        </div>
+      </form>
+    </div>
+
+    <nav class="g-nav wrap" aria-label="グローバルナビ">
+      <a class="route active" href="#news">ニュース</a>
+      <a class="route" href="#weather">天気</a>
+      <a class="route" href="#sports">スポーツ</a>
+      <a class="route" href="#finance">ファイナンス</a>
+      <a class="route" href="#tv">テレビ</a>
+      <a class="route" href="#maps">地図</a>
+      <a class="route" href="#transit">路線</a>
+      <a class="route" href="#mail">メール</a>
+      <a class="route" href="#shopping">ショッピング</a>
+      <a class="route" href="#auction">オークション</a>
+      <a class="route" href="#travel">トラベル</a>
+    </nav>
+  </header>
+  <div class="site-note wrap" role="note">Yanoo! Japanﾀﾞﾖ!ww</div>
+
+  <main class="wrap" role="main">
+    <!-- ページ: ニュース -->
+    <section id="page-news" class="page active" aria-labelledby="news-title">
+      <div class="news" aria-labelledby="news-title">
+        <div class="head">
+          <h2 id="news-title">主要ニュース</h2>
+          <div class="tabs" role="tablist">
+            <button class="active" role="tab" aria-selected="true" data-tab="top">主要</button>
+            <button role="tab" data-tab="dom">国内</button>
+            <button role="tab" data-tab="int">国際</button>
+            <button role="tab" data-tab="bus">経済</button>
+            <button role="tab" data-tab="ent">エンタメ</button>
+            <button role="tab" data-tab="spo">スポーツ</button>
+            <button role="tab" data-tab="it">IT</button>
+          </div>
+        </div>
+        <div class="panel active" data-panel="top" role="tabpanel">
+          <ul class="news-list" id="news-top">
+            <!-- ニュース項目をここに追加 -->
+          </ul>
+        </div>
+        <div class="panel" data-panel="dom" role="tabpanel">
+          <ul class="news-list" id="news-dom"></ul>
+        </div>
+        <div class="panel" data-panel="int" role="tabpanel">
+          <ul class="news-list" id="news-int"></ul>
+        </div>
+        <div class="panel" data-panel="bus" role="tabpanel">
+          <ul class="news-list" id="news-bus"></ul>
+        </div>
+        <div class="panel" data-panel="ent" role="tabpanel">
+          <ul class="news-list" id="news-ent"></ul>
+        </div>
+        <div class="panel" data-panel="spo" role="tabpanel">
+          <ul class="news-list" id="news-spo"></ul>
+        </div>
+        <div class="panel" data-panel="it" role="tabpanel">
+          <ul class="news-list" id="news-it"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ページ: 天気 -->
+    <section id="page-weather" class="page" aria-labelledby="weather-title">
+      <h2 id="weather-title" class="page-title">天気</h2>
+      <div class="card">
+        <div class="body">
+          <form class="form-row" onsubmit="event.preventDefault();">
+            <input type="text" placeholder="都市名を入力（例: 東京）" aria-label="都市名" />
+            <button type="submit">検索</button>
+          </form>
+          <div id="weather-result"><!-- ここに結果を表示 --></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ページ: スポーツ -->
+    <section id="page-sports" class="page" aria-labelledby="sports-title">
+      <h2 id="sports-title" class="page-title">スポーツ</h2>
+      <div class="card"><div class="body" id="sports-body"><!-- 競技・リーグ別のUIを配置 --></div></div>
+    </section>
+
+    <!-- ページ: ファイナンス -->
+    <section id="page-finance" class="page" aria-labelledby="finance-title">
+      <h2 id="finance-title" class="page-title">ファイナンス</h2>
+      <div class="card"><div class="body">
+        <form class="form-row" onsubmit="event.preventDefault();">
+          <input type="text" placeholder="銘柄/為替を入力（例: 9984, USD/JPY）" aria-label="ファイナンス検索" />
+          <button type="submit">表示</button>
+        </form>
+        <div id="finance-result"><!-- チャートや価格の表示領域 --></div>
+      </div></div>
+    </section>
+
+    <!-- ページ: テレビ -->
+    <section id="page-tv" class="page" aria-labelledby="tv-title">
+      <h2 id="tv-title" class="page-title">テレビ</h2>
+      <div class="card"><div class="body" id="tv-list"><!-- 番組表やおすすめ --></div></div>
+    </section>
+
+    <!-- ページ: 地図 -->
+    <section id="page-maps" class="page" aria-labelledby="maps-title">
+      <h2 id="maps-title" class="page-title">地図</h2>
+      <div class="card"><div class="body">
+        <form class="form-row" onsubmit="event.preventDefault();">
+          <input type="text" placeholder="場所や住所を入力" aria-label="地図検索" />
+          <button type="submit">検索</button>
+        </form>
+        <div id="map-canvas" class="map-placeholder"><!-- 地図表示エリア --></div>
+      </div></div>
+    </section>
+
+    <!-- ページ: 路線 -->
+    <section id="page-transit" class="page" aria-labelledby="transit-title">
+      <h2 id="transit-title" class="page-title">路線</h2>
+      <div class="card"><div class="body">
+        <form class="form-col" onsubmit="event.preventDefault();">
+          <input type="text" placeholder="出発（駅名）" aria-label="出発駅" />
+          <input type="text" placeholder="到着（駅名）" aria-label="到着駅" />
+          <div class="form-row">
+            <input type="datetime-local" aria-label="日時" />
+            <button type="submit">検索</button>
+          </div>
+        </form>
+        <div id="transit-result"><!-- 乗換結果 --></div>
+      </div></div>
+    </section>
+
+    <!-- ページ: メール -->
+    <section id="page-mail" class="page" aria-labelledby="mail-title">
+      <h2 id="mail-title" class="page-title">メール</h2>
+      <div class="card"><div class="body">
+        <form class="form-col" onsubmit="event.preventDefault();">
+          <input type="email" placeholder="Yanoo! ID（メール）" aria-label="メールアドレス" />
+          <input type="password" placeholder="パスワード" aria-label="パスワード" />
+          <button type="submit">ログイン</button>
+        </form>
+      </div></div>
+    </section>
+
+    <!-- ページ: ショッピング -->
+    <section id="page-shopping" class="page" aria-labelledby="shopping-title">
+      <h2 id="shopping-title" class="page-title">ショッピング</h2>
+      <div class="card"><div class="body">
+        <form class="form-row" onsubmit="event.preventDefault();">
+          <input type="text" placeholder="商品名を入力" aria-label="商品検索" />
+          <button type="submit">検索</button>
+        </form>
+        <div id="shopping-result"><!-- 商品一覧 --></div>
+      </div></div>
+    </section>
+
+    <!-- ページ: オークション -->
+    <section id="page-auction" class="page" aria-labelledby="auction-title">
+      <h2 id="auction-title" class="page-title">オークション</h2>
+      <div class="card"><div class="body">
+        <form class="form-row" onsubmit="event.preventDefault();">
+          <input type="text" placeholder="キーワード" aria-label="オークション検索" />
+          <button type="submit">検索</button>
+        </form>
+        <div id="auction-result"><!-- 出品一覧 --></div>
+      </div></div>
+    </section>
+
+    <!-- ページ: トラベル -->
+    <section id="page-travel" class="page" aria-labelledby="travel-title">
+      <h2 id="travel-title" class="page-title">トラベル</h2>
+      <div class="card"><div class="body">
+        <form class="form-row" onsubmit="event.preventDefault();">
+          <input type="text" placeholder="行き先・ホテル名など" aria-label="旅行検索" />
+          <button type="submit">検索</button>
+        </form>
+        <div id="travel-result"><!-- 旅行プラン/宿検索の結果 --></div>
+      </div></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap f-wrap" aria-label="フッターナビゲーション">
+      <div>
+        <h4 style="margin:0 0 8px; font-size:14px; color:#333">Yanoo! について</h4>
+        <ul>
+          <li><a href="#">会社情報（ダミー）</a></li>
+          <li><a href="#">採用情報（ダミー）</a></li>
+          <li><a href="#">利用規約</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 8px; font-size:14px; color:#333">ポリシー</h4>
+        <ul>
+          <li><a href="#">プライバシー</a></li>
+          <li><a href="#">クッキー</a></li>
+          <li><a href="#">広告について</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 8px; font-size:14px; color:#333">ヘルプ</h4>
+        <ul>
+          <li><a href="#">お問い合わせ</a></li>
+          <li><a href="#">ガイド</a></li>
+          <li><a href="#">安全の取り組み</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 8px; font-size:14px; color:#333">言語</h4>
+        <ul>
+          <li><a href="#">日本語</a></li>
+          <li><a href="#">English</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">© 2025 Yanoo! JAPAN — This is a fan-made site and is not affiliated with Yahoo! Inc. or LY Corporation. All names here are fictitious.
+    </div>
+  </footer>
+
+  <script>
+    // 視覚的に隠すクラス
+    (function(){
+      const css = document.createElement('style');
+      css.innerHTML = '.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}';
+      document.head.appendChild(css);
+    })();
+
+    // ニュース：タブ切り替え（ページ内）
+    document.querySelectorAll('.tabs button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const key = btn.getAttribute('data-tab');
+        document.querySelectorAll('.panel').forEach(p=>{
+          p.classList.toggle('active', p.getAttribute('data-panel')===key);
+        });
+      });
+    });
+
+    // シンプルなハッシュルーター
+    const routes = ['news','weather','sports','finance','tv','maps','transit','mail','shopping','auction','travel'];
+    function showPage(hash){
+      const route = (hash || '#news').replace('#','');
+      document.querySelectorAll('.page').forEach(sec=>sec.classList.remove('active'));
+      const el = document.getElementById('page-'+route);
+      if(el){ el.classList.add('active'); }
+      document.querySelectorAll('.g-nav .route').forEach(a=>{
+        const match = a.getAttribute('href') === '#'+route;
+        a.classList.toggle('active', match);
+      });
+    }
+    window.addEventListener('hashchange', ()=>showPage(location.hash));
+    document.addEventListener('DOMContentLoaded', ()=>showPage(location.hash));
+  </script>
 </body>
 </html>
