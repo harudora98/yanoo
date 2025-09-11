@@ -59,6 +59,7 @@
     .news{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden}
     .news .head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border)}
     .news .head h2{font-size:18px;margin:0}
+    .joke-note{font-size:12px;color:#999;margin-left:8px}
     .tabs{display:flex;gap:0}
     .tabs button{border:none;background:#fff;padding:10px 12px;font-size:14px;cursor:pointer;border-bottom:3px solid transparent}
     .tabs button:hover{background:var(--ui)}
@@ -67,11 +68,12 @@
     .panel{display:none;padding:8px 14px 12px}
     .panel.active{display:block}
     .news-list{list-style:none;margin:0;padding:0}
-    .news-list li{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #f2f2f2}
+    .news-list li{display:flex;flex-direction:column;gap:6px;padding:12px 0;border-bottom:1px solid #f2f2f2}
     .news-list li:last-child{border-bottom:none}
+    .news-item{display:flex;gap:12px;align-items:flex-start}
+    .news-item a{color:#111;line-height:1.35;font-size:16px;font-weight:600}
+    .meta{display:flex;gap:8px;align-items:center;margin-top:6px}
     .badge{display:inline-block;min-width:42px;text-align:center;font-size:11px;padding:2px 6px;border-radius:12px;background:#fff1f1;color:var(--brand);border:1px solid #ffd1d6}
-    .news-list a{color:#111;line-height:1.35}
-    .news-list a.new::after{content:"NEW";display:inline-block;margin-left:6px;font-size:10px;color:#fff;background:#ffb300;border-radius:3px;padding:1px 4px}
     .time{font-size:12px;color:#888;margin-left:auto}
     .more{padding:10px 14px;background:#fff}
 
@@ -108,6 +110,9 @@
     footer{border-top:1px solid var(--border);background:#fff;color:#666}
     .legal{font-size:12px;text-align:center;color:#888;padding:14px}
 
+    /* smallネタ注記 */
+    .small-note{font-size:11px;color:#999;margin-left:6px;vertical-align:middle}
+
     /* Responsive */
     @media (max-width:980px){
       main.wrap{grid-template-columns:1fr}
@@ -129,7 +134,7 @@
     .form-row button,.form-col button{border:1px solid var(--brand);background:var(--brand);color:#fff;padding:10px 16px;border-radius:6px;cursor:pointer}
     .map-placeholder{height:320px;background:#fafafa;border:1px dashed #ddd;border-radius:8px}
     /* 共通ノート（全ページに表示） */
-    .site-note{margin:0 auto;max-width:1180px;padding:8px 16px;color:#333;background:#fff7e6;border-top:1px solid #ffe0b3;border-bottom:1px solid #ffe0b3;font-size:14px}
+    .site-note{margin:0 auto;max-width:1180px;padding:8px 16px;color:#333;background:#fff7e6;border-top:1px solid #ffe0b3;border-bottom:1px solid #ffe0b3;font-size:14px;display:flex;align-items:center;justify-content:space-between}
   </style>
 </head>
 <body>
@@ -180,14 +185,18 @@
       <a class="route" href="#travel">トラベル</a>
     </nav>
   </header>
-  <div class="site-note wrap" role="note">Yanoo! Japanﾀﾞﾖ!ww</div>
+
+  <div class="site-note wrap" role="note">
+    <div>Yanoo! Japanﾀﾞﾖ!ww</div>
+    <div class="small-note">（ネタ）</div>
+  </div>
 
   <main class="wrap" role="main">
     <!-- ページ: ニュース -->
     <section id="page-news" class="page active" aria-labelledby="news-title">
       <div class="news" aria-labelledby="news-title">
         <div class="head">
-          <h2 id="news-title">主要ニュース</h2>
+          <h2 id="news-title">主要ニュース<span class="joke-note">（ネタ）</span></h2>
           <div class="tabs" role="tablist">
             <button class="active" role="tab" aria-selected="true" data-tab="top">主要</button>
             <button role="tab" data-tab="dom">国内</button>
@@ -198,33 +207,93 @@
             <button role="tab" data-tab="it">IT</button>
           </div>
         </div>
+
         <div class="panel active" data-panel="top" role="tabpanel">
           <ul class="news-list" id="news-top">
-            <!-- ニュース項目をここに追加 -->
+            <li>
+              <div class="news-item">
+                <a href="#">福岡市で「空に向かって乾杯」イベント　参加者は全員ジュース持参</a>
+              </div>
+              <div class="meta"><span class="badge">イベント</span><span class="time">今</span></div>
+            </li>
+
+            <li>
+              <div class="news-item">
+                <a href="#">東京都内で「歩きスマホ禁止ダンス」披露　なぜかSNSで大バズり</a>
+              </div>
+              <div class="meta"><span class="badge">話題</span><span class="time">今</span></div>
+            </li>
+
+            <li>
+              <div class="news-item">
+                <a href="#">新幹線の座席で忘れられた謎のぬいぐるみ　駅員が毎日話しかけていると話題</a>
+              </div>
+              <div class="meta"><span class="badge">ほっこり</span><span class="time">今</span></div>
+            </li>
+
+            <li>
+              <div class="news-item">
+                <a href="#">奈良公園のシカ、観光客のスマホに自撮り成功　偶然なのか計算なのか</a>
+              </div>
+              <div class="meta"><span class="badge">動物</span><span class="time">今</span></div>
+            </li>
+
+            <li>
+              <div class="news-item">
+                <a href="#">大阪で開催「エスカレーター逆走選手権」　一瞬で警備員に止められる</a>
+              </div>
+              <div class="meta"><span class="badge">催し</span><span class="time">今</span></div>
+            </li>
+
+            <li>
+              <div class="news-item">
+                <a href="#">北海道で「氷のスタバ」誕生　5分で全商品が水に</a>
+              </div>
+              <div class="meta"><span class="badge">奇報</span><span class="time">今</span></div>
+            </li>
+
+            <li>
+              <div class="news-item">
+                <a href="#">名古屋名物「味噌カツ」がAI判定でスイーツ分類に　市民困惑</a>
+              </div>
+              <div class="meta"><span class="badge">食</span><span class="time">今</span></div>
+            </li>
+
+            <li>
+              <div class="news-item">
+                <a href="#">秋田犬、飼い主より先にふるさと納税を済ませていたことが判明</a>
+              </div>
+              <div class="meta"><span class="badge">地域</span><span class="time">今</span></div>
+            </li>
+
+            <li>
+              <div class="news-item">
+                <a href="#">京都で「無人お茶会」実施　ロボットだけで抹茶を回し合う光景に観光客ざわつく</a>
+              </div>
+              <div class="meta"><span class="badge">テック</span><span class="time">今</span></div>
+            </li>
+
+            <li>
+              <div class="news-item">
+                <a href="#">鹿児島の火山灰、ついにWi-Fiの電波を遮る説浮上　研究者「信じるかはあなた次第」</a>
+              </div>
+              <div class="meta"><span class="badge">科学</span><span class="time">今</span></div>
+            </li>
           </ul>
         </div>
-        <div class="panel" data-panel="dom" role="tabpanel">
-          <ul class="news-list" id="news-dom"></ul>
-        </div>
-        <div class="panel" data-panel="int" role="tabpanel">
-          <ul class="news-list" id="news-int"></ul>
-        </div>
-        <div class="panel" data-panel="bus" role="tabpanel">
-          <ul class="news-list" id="news-bus"></ul>
-        </div>
-        <div class="panel" data-panel="ent" role="tabpanel">
-          <ul class="news-list" id="news-ent"></ul>
-        </div>
-        <div class="panel" data-panel="spo" role="tabpanel">
-          <ul class="news-list" id="news-spo"></ul>
-        </div>
-        <div class="panel" data-panel="it" role="tabpanel">
-          <ul class="news-list" id="news-it"></ul>
-        </div>
+
+        <!-- 他パネル（空） -->
+        <div class="panel" data-panel="dom" role="tabpanel"><ul class="news-list" id="news-dom"></ul></div>
+        <div class="panel" data-panel="int" role="tabpanel"><ul class="news-list" id="news-int"></ul></div>
+        <div class="panel" data-panel="bus" role="tabpanel"><ul class="news-list" id="news-bus"></ul></div>
+        <div class="panel" data-panel="ent" role="tabpanel"><ul class="news-list" id="news-ent"></ul></div>
+        <div class="panel" data-panel="spo" role="tabpanel"><ul class="news-list" id="news-spo"></ul></div>
+        <div class="panel" data-panel="it" role="tabpanel"><ul class="news-list" id="news-it"></ul></div>
+
       </div>
     </section>
 
-    <!-- ページ: 天気 -->
+    <!-- 他ページ（省略しないで残してあります） -->
     <section id="page-weather" class="page" aria-labelledby="weather-title">
       <h2 id="weather-title" class="page-title">天気</h2>
       <div class="card">
@@ -238,13 +307,11 @@
       </div>
     </section>
 
-    <!-- ページ: スポーツ -->
     <section id="page-sports" class="page" aria-labelledby="sports-title">
       <h2 id="sports-title" class="page-title">スポーツ</h2>
       <div class="card"><div class="body" id="sports-body"><!-- 競技・リーグ別のUIを配置 --></div></div>
     </section>
 
-    <!-- ページ: ファイナンス -->
     <section id="page-finance" class="page" aria-labelledby="finance-title">
       <h2 id="finance-title" class="page-title">ファイナンス</h2>
       <div class="card"><div class="body">
@@ -256,13 +323,11 @@
       </div></div>
     </section>
 
-    <!-- ページ: テレビ -->
     <section id="page-tv" class="page" aria-labelledby="tv-title">
       <h2 id="tv-title" class="page-title">テレビ</h2>
       <div class="card"><div class="body" id="tv-list"><!-- 番組表やおすすめ --></div></div>
     </section>
 
-    <!-- ページ: 地図 -->
     <section id="page-maps" class="page" aria-labelledby="maps-title">
       <h2 id="maps-title" class="page-title">地図</h2>
       <div class="card"><div class="body">
@@ -274,7 +339,6 @@
       </div></div>
     </section>
 
-    <!-- ページ: 路線 -->
     <section id="page-transit" class="page" aria-labelledby="transit-title">
       <h2 id="transit-title" class="page-title">路線</h2>
       <div class="card"><div class="body">
@@ -290,7 +354,6 @@
       </div></div>
     </section>
 
-    <!-- ページ: メール -->
     <section id="page-mail" class="page" aria-labelledby="mail-title">
       <h2 id="mail-title" class="page-title">メール</h2>
       <div class="card"><div class="body">
@@ -302,7 +365,6 @@
       </div></div>
     </section>
 
-    <!-- ページ: ショッピング -->
     <section id="page-shopping" class="page" aria-labelledby="shopping-title">
       <h2 id="shopping-title" class="page-title">ショッピング</h2>
       <div class="card"><div class="body">
@@ -314,7 +376,6 @@
       </div></div>
     </section>
 
-    <!-- ページ: オークション -->
     <section id="page-auction" class="page" aria-labelledby="auction-title">
       <h2 id="auction-title" class="page-title">オークション</h2>
       <div class="card"><div class="body">
@@ -326,7 +387,6 @@
       </div></div>
     </section>
 
-    <!-- ページ: トラベル -->
     <section id="page-travel" class="page" aria-labelledby="travel-title">
       <h2 id="travel-title" class="page-title">トラベル</h2>
       <div class="card"><div class="body">
@@ -337,10 +397,12 @@
         <div id="travel-result"><!-- 旅行プラン/宿検索の結果 --></div>
       </div></div>
     </section>
+
   </main>
 
   <footer>
     <div class="legal">© 2025 Yanoo! JAPAN — This is a fan-made site and is not affiliated with Yahoo! Inc. or LY Corporation. All names here are fictitious.
+      <span class="small-note">（ネタ記事です）</span>
     </div>
   </footer>
 
