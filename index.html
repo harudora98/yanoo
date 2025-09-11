@@ -343,3 +343,78 @@
     </section>
   </main>
 
+  <footer>
+    <div class="wrap f-wrap" aria-label="フッターナビゲーション">
+      <div>
+        <h4 style="margin:0 0 8px; font-size:14px; color:#333">Yanoo! について</h4>
+        <ul>
+          <li><a href="#">会社情報（ダミー）</a></li>
+          <li><a href="#">採用情報（ダミー）</a></li>
+          <li><a href="#">利用規約</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 8px; font-size:14px; color:#333">ポリシー</h4>
+        <ul>
+          <li><a href="#">プライバシー</a></li>
+          <li><a href="#">クッキー</a></li>
+          <li><a href="#">広告について</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 8px; font-size:14px; color:#333">ヘルプ</h4>
+        <ul>
+          <li><a href="#">お問い合わせ</a></li>
+          <li><a href="#">ガイド</a></li>
+          <li><a href="#">安全の取り組み</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 8px; font-size:14px; color:#333">言語</h4>
+        <ul>
+          <li><a href="#">日本語</a></li>
+          <li><a href="#">English</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">© 2025 Yanoo! JAPAN — This is a fan-made site and is not affiliated with Yahoo! Inc. or LY Corporation. All names here are fictitious.
+    </div>
+  </footer>
+
+  <script>
+    // 視覚的に隠すクラス
+    (function(){
+      const css = document.createElement('style');
+      css.innerHTML = '.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}';
+      document.head.appendChild(css);
+    })();
+
+    // ニュース：タブ切り替え（ページ内）
+    document.querySelectorAll('.tabs button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const key = btn.getAttribute('data-tab');
+        document.querySelectorAll('.panel').forEach(p=>{
+          p.classList.toggle('active', p.getAttribute('data-panel')===key);
+        });
+      });
+    });
+
+    // シンプルなハッシュルーター
+    const routes = ['news','weather','sports','finance','tv','maps','transit','mail','shopping','auction','travel'];
+    function showPage(hash){
+      const route = (hash || '#news').replace('#','');
+      document.querySelectorAll('.page').forEach(sec=>sec.classList.remove('active'));
+      const el = document.getElementById('page-'+route);
+      if(el){ el.classList.add('active'); }
+      document.querySelectorAll('.g-nav .route').forEach(a=>{
+        const match = a.getAttribute('href') === '#'+route;
+        a.classList.toggle('active', match);
+      });
+    }
+    window.addEventListener('hashchange', ()=>showPage(location.hash));
+    document.addEventListener('DOMContentLoaded', ()=>showPage(location.hash));
+  </script>
+</body>
+</html>
