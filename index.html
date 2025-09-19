@@ -113,8 +113,8 @@
     .small-note{font-size:11px;color:#999;margin-left:6px;vertical-align:middle}
 
     /* Responsive */
-    @media (max-width:980px){.weather-grid{grid-template-columns:repeat(2,1fr)} .svc-grid{grid-template-columns:repeat(3,1fr)}}
-    @media (max-width:560px){.weather-grid{grid-template-columns:1fr} .masthead{flex-direction:column;align-items:stretch} .brand{font-size:30px} .g-nav{flex-wrap:wrap} .svc-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:980px){.weather-grid{grid-template-columns:repeat(2,1fr)} .svc-grid{grid-template-columns:repeat(3,1fr)} }
+    @media (max-width:560px){.weather-grid{grid-template-columns:1fr} .masthead{flex-direction:column;align-items:stretch} .brand{font-size:30px} .g-nav{flex-wrap:wrap} .svc-grid{grid-template-columns:repeat(2,1fr)} }
 
     /* ページ切り替え（単一HTML内） */
     .page{display:none}
@@ -202,82 +202,21 @@
 
         <div class="panel active" data-panel="top" role="tabpanel">
           <ul class="news-list" id="news-top">
-
-            <!-- 最新10件のみ表示（以前の最初の10件は削除済み） -->
-
-            <li>
-              <div class="news-item">
-                <a href="#">渋谷スクランブル交差点で巨大ネギ暴走　信号も巻き込みダンス大会に</a>
-              </div>
-              <div class="meta"><span class="badge">珍事</span><span class="time">今</span></div>
-            </li>
-
-            <li>
-              <div class="news-item">
-                <a href="#">大阪の商店街で「しゃべる自販機」が選挙に立候補　支持率12%獲得</a>
-              </div>
-              <div class="meta"><span class="badge">社会</span><span class="time">今</span></div>
-            </li>
-
-            <li>
-              <div class="news-item">
-                <a href="#">富士山、朝起きたら逆さに　観光客「寝ぼけたかと思った」</a>
-              </div>
-              <div class="meta"><span class="badge">観光</span><span class="time">今</span></div>
-            </li>
-
-            <li>
-              <div class="news-item">
-                <a href="#">京都の寺から「カエル語お経」流れる　修行僧もゲコゲコ合唱</a>
-              </div>
-              <div class="meta"><span class="badge">文化</span><span class="time">今</span></div>
-            </li>
-
-            <li>
-              <div class="news-item">
-                <a href="#">新潟県で発見された「米に似た石」　県庁がプレミアムご飯として販売開始</a>
-              </div>
-              <div class="meta"><span class="badge">地域</span><span class="time">今</span></div>
-            </li>
-
-            <li>
-              <div class="news-item">
-                <a href="#">名古屋城の金シャチ、夜中にドン・キホーテで買い物する姿がSNSで拡散</a>
-              </div>
-              <div class="meta"><span class="badge">都市伝説</span><span class="time">今</span></div>
-            </li>
-
-            <li>
-              <div class="news-item">
-                <a href="#">秋葉原で充電中のスマホ、突然「俺は冷蔵庫になりたい」と発言</a>
-              </div>
-              <div class="meta"><span class="badge">テック</span><span class="time">今</span></div>
-            </li>
-
-            <li>
-              <div class="news-item">
-                <a href="#">北海道の雪だるま、就職活動を開始　「溶ける前に内定ほしい」</a>
-              </div>
-              <div class="meta"><span class="badge">季節</span><span class="time">今</span></div>
-            </li>
-
-            <li>
-              <div class="news-item">
-                <a href="#">福岡の屋台ラーメン、気づいたら全員スープに入浴していた件</a>
-              </div>
-              <div class="meta"><span class="badge">食</span><span class="time">今</span></div>
-            </li>
-
-            <li>
-              <div class="news-item">
-                <a href="#">東京都心で「UFO渋滞」発生　ETCが使えず宇宙人困惑</a>
-              </div>
-              <div class="meta"><span class="badge">事件</span><span class="time">今</span></div>
-            </li>
-
+            <!-- 既存の10件 -->
+            <li><div class="news-item"><a href="#">渋谷スクランブル交差点で巨大ネギ暴走　信号も巻き込みダンス大会に</a></div><div class="meta"><span class="badge">珍事</span><span class="time">今</span></div></li>
+            <li><div class="news-item"><a href="#">大阪の商店街で「しゃべる自販機」が選挙に立候補　支持率12%獲得</a></div><div class="meta"><span class="badge">社会</span><span class="time">今</span></div></li>
+            <li><div class="news-item"><a href="#">富士山、朝起きたら逆さに　観光客「寝ぼけたかと思った」</a></div><div class="meta"><span class="badge">観光</span><span class="time">今</span></div></li>
+            <li><div class="news-item"><a href="#">京都の寺から「カエル語お経」流れる　修行僧もゲコゲコ合唱</a></div><div class="meta"><span class="badge">文化</span><span class="time">今</span></div></li>
+            <li><div class="news-item"><a href="#">新潟県で発見された「米に似た石」　県庁がプレミアムご飯として販売開始</a></div><div class="meta"><span class="badge">地域</span><span class="time">今</span></div></li>
+            <li><div class="news-item"><a href="#">名古屋城の金シャチ、夜中にドン・キホーテで買い物する姿がSNSで拡散</a></div><div class="meta"><span class="badge">都市伝説</span><span class="time">今</span></div></li>
+            <li><div class="news-item"><a href="#">秋葉原で充電中のスマホ、突然「俺は冷蔵庫になりたい」と発言</a></div><div class="meta"><span class="badge">テック</span><span class="time">今</span></div></li>
+            <li><div class="news-item"><a href="#">北海道の雪だるま、就職活動を開始　「溶ける前に内定ほしい」</a></div><div class="meta"><span class="badge">季節</span><span class="time">今</span></div></li>
+            <li><div class="news-item"><a href="#">福岡の屋台ラーメン、気づいたら全員スープに入浴していた件</a></div><div class="meta"><span class="badge">食</span><span class="time">今</span></div></li>
+            <li><div class="news-item"><a href="#">東京都心で「UFO渋滞」発生　ETCが使えず宇宙人困惑</a></div><div class="meta"><span class="badge">事件</span><span class="time">今</span></div></li>
           </ul>
         </div>
 
+        <!-- 空きタブはそのまま -->
         <div class="panel" data-panel="dom" role="tabpanel"><ul class="news-list" id="news-dom"></ul></div>
         <div class="panel" data-panel="int" role="tabpanel"><ul class="news-list" id="news-int"></ul></div>
         <div class="panel" data-panel="bus" role="tabpanel"><ul class="news-list" id="news-bus"></ul></div>
@@ -359,36 +298,60 @@
     <!-- ページ: スポーツ -->
     <section id="page-sports" class="page" aria-labelledby="sports-title">
       <h3 id="sports-title" class="page-title">スポーツ</h3>
-      <div class="card"><div class="body" id="sports-body"><!-- 競技・リーグ別のUIを配置できます --></div></div>
+      <div class="card"><div class="body" id="sports-body">
+        <ul class="news-list">
+          <li><div class="news-item"><a href="#">世界選手権で重力ルールが導入、ジャンプは上に飛んだ分だけ減点</a></div><div class="meta"><span class="badge">スポーツ</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">サッカー日本代表、ゴールが全部透明だったため試合が延長戦で永遠に続く</a></div><div class="meta"><span class="badge">サッカー</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">プロ野球でボールが自分でバウンドして捕球不可になり全試合引き分けに</a></div><div class="meta"><span class="badge">野球</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">五輪に「空中チェス」が追加、選手は同時に空を飛びながら駒を動かす</a></div><div class="meta"><span class="badge">五輪</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">マラソンでコース上に掃除機が出現、選手が全員靴下を吸われる</a></div><div class="meta"><span class="badge">マラソン</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">eスポーツ決勝で観客のコントローラーが勝手に操作して優勝者が無効に</a></div><div class="meta"><span class="badge">eスポーツ</span><span class="time">ネタ</span></div></li>
+        </ul>
+      </div></div>
     </section>
 
     <!-- ページ: ファイナンス -->
     <section id="page-finance" class="page" aria-labelledby="finance-title">
       <h3 id="finance-title" class="page-title">ファイナンス</h3>
       <div class="card"><div class="body">
-        <form class="form-row" onsubmit="event.preventDefault();">
-          <input type="text" placeholder="銘柄/為替を入力（例: 9984, USD/JPY）" aria-label="ファイナンス検索" />
-          <button type="submit">表示</button>
-        </form>
-        <div id="finance-result"><!-- チャートや価格の表示領域 --></div>
+        <ul class="news-list">
+          <li><div class="news-item"><a href="#">日経平均が「マイナスにならない為の法律」で永久上昇</a></div><div class="meta"><span class="badge">株式</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">銀行が預金を未来に先払いする「逆ローン」サービス開始</a></div><div class="meta"><span class="badge">銀行</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">仮想通貨が突然「空気コイン」として実体化、配当は酸素</a></div><div class="meta"><span class="badge">暗号資産</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">ATMが金を吐き出す代わりに宝くじの当たり券を出す</a></div><div class="meta"><span class="badge">金融機器</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">株主総会で株が笑っているかどうかで議決権が変わるルール導入</a></div><div class="meta"><span class="badge">コーポレート</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">為替が曜日ごとにランダムに0円にリセットされる「週末ゼロ化」開始</a></div><div class="meta"><span class="badge">為替</span><span class="time">ネタ</span></div></li>
+        </ul>
       </div></div>
     </section>
 
     <!-- ページ: テレビ -->
     <section id="page-tv" class="page" aria-labelledby="tv-title">
       <h3 id="tv-title" class="page-title">テレビ</h3>
-      <div class="card"><div class="body" id="tv-list"><!-- 番組表やおすすめ --></div></div>
+      <div class="card"><div class="body" id="tv-list">
+        <ul class="news-list">
+          <li><div class="news-item"><a href="#">24時間ニュースチャンネル、放送内容が毎分別の歴史に切り替わる</a></div><div class="meta"><span class="badge">ニュース</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">人気ドラマで俳優が毎話入れ替わる「役替わりシーズン」放送決定</a></div><div class="meta"><span class="badge">ドラマ</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">視聴率が高すぎてテレビ受信機が自己増殖し街中にテレビが溢れる</a></div><div class="meta"><span class="badge">視聴率</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">天気予報が実際に未来を変えるスイッチになっており視聴者が操作可</a></div><div class="meta"><span class="badge">天気</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">CMが視聴者の夢に直接出現して商品を買わせる</a></div><div class="meta"><span class="badge">CM</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">クイズ番組で答えたら現金ではなく「時間」が減る賞品</a></div><div class="meta"><span class="badge">番組</span><span class="time">ネタ</span></div></li>
+        </ul>
+      </div></div>
     </section>
 
     <!-- ページ: 地図 -->
     <section id="page-maps" class="page" aria-labelledby="maps-title">
       <h3 id="maps-title" class="page-title">地図</h3>
       <div class="card"><div class="body">
-        <form class="form-row" onsubmit="event.preventDefault();">
-          <input type="text" placeholder="場所や住所を入力" aria-label="地図検索" />
-          <button type="submit">検索</button>
-        </form>
-        <div id="map-canvas" class="map-placeholder"><!-- 地図表示エリア --></div>
+        <ul class="news-list">
+          <li><div class="news-item"><a href="#">最新地図で「北」が毎朝ランダムに変わる仕様にアップデート</a></div><div class="meta"><span class="badge">地図</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">都市マップに「存在しない通り」が大量表示され、歩くと別世界へ接続</a></div><div class="meta"><span class="badge">都市伝説</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">コンパス付き地図が自我を持ち、逆方向を指し続ける</a></div><div class="meta"><span class="badge">ガジェット</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">地図アプリが徒歩ルートで空を飛ぶ道を案内する</a></div><div class="meta"><span class="badge">アプリ</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">世界地図の海が消え、国どうしが陸続きに繋がるリマップ</a></div><div class="meta"><span class="badge">地理</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">地名が全部ユーザーの名前に置き換わる「パーソナル地図」モード</a></div><div class="meta"><span class="badge">個人化</span><span class="time">ネタ</span></div></li>
+        </ul>
       </div></div>
     </section>
 
@@ -396,15 +359,14 @@
     <section id="page-transit" class="page" aria-labelledby="transit-title">
       <h3 id="transit-title" class="page-title">路線</h3>
       <div class="card"><div class="body">
-        <form class="form-col" onsubmit="event.preventDefault();">
-          <input type="text" placeholder="出発（駅名）" aria-label="出発駅" />
-          <input type="text" placeholder="到着（駅名）" aria-label="到着駅" />
-          <div class="form-row">
-            <input type="datetime-local" aria-label="日時" />
-            <button type="submit">検索</button>
-          </div>
-        </form>
-        <div id="transit-result"><!-- 乗換結果 --></div>
+        <ul class="news-list">
+          <li><div class="news-item"><a href="#">東京メトロが一日だけ「直線のみ運行」を実施、全線が真っ直ぐに伸びる</a></div><div class="meta"><span class="badge">鉄道</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">電車が駅に止まる代わりに乗客を瞬間移動させてしまう新システム</a></div><div class="meta"><span class="badge">技術</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">路線図が立体化してビルを貫通、乗客はエレベーターで乗車する</a></div><div class="meta"><span class="badge">路線図</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">終電が存在しない代わりに「始電」だけが24時間走る路線</a></div><div class="meta"><span class="badge">ダイヤ</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">列車内に時間が巻き戻るコンパートメントがあり、到着時に年齢が変わる</a></div><div class="meta"><span class="badge">SF</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">切符が紙ではなく「記憶」になり、一度買うとその日の記憶が消える</a></div><div class="meta"><span class="badge">券類</span><span class="time">ネタ</span></div></li>
+        </ul>
       </div></div>
     </section>
 
@@ -412,11 +374,14 @@
     <section id="page-mail" class="page" aria-labelledby="mail-title">
       <h3 id="mail-title" class="page-title">メール</h3>
       <div class="card"><div class="body">
-        <form class="form-col" onsubmit="event.preventDefault();">
-          <input type="email" placeholder="Yanoo! ID（メール）" aria-label="メールアドレス" />
-          <input type="password" placeholder="パスワード" aria-label="パスワード" />
-          <button type="submit">ログイン</button>
-        </form>
+        <ul class="news-list">
+          <li><div class="news-item"><a href="#">受信トレイが物理化して郵便受けから人が出てきてメールを読む</a></div><div class="meta"><span class="badge">UX</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">迷惑メールが逆に幸運を招くフィルタに分類されるアルゴリズム登場</a></div><div class="meta"><span class="badge">アルゴリズム</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">メール送信で相手のメールアドレスではなく「未来の自分」に届く</a></div><div class="meta"><span class="badge">タイムトラベル</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">添付ファイルが現実世界に現れてそのまま家具として使える</a></div><div class="meta"><span class="badge">添付</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">返信ボタンを押すと相手の心の中に直接届くリアルタイム返信</a></div><div class="meta"><span class="badge">コミュニケーション</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">受信日時が過去にも未来にも設定でき、時間旅行メールが流行</a></div><div class="meta"><span class="badge">時間</span><span class="time">ネタ</span></div></li>
+        </ul>
       </div></div>
     </section>
 
@@ -424,11 +389,14 @@
     <section id="page-shopping" class="page" aria-labelledby="shopping-title">
       <h3 id="shopping-title" class="page-title">ショッピング</h3>
       <div class="card"><div class="body">
-        <form class="form-row" onsubmit="event.preventDefault();">
-          <input type="text" placeholder="商品名を入力" aria-label="商品検索" />
-          <button type="submit">検索</button>
-        </form>
-        <div id="shopping-result"><!-- 商品一覧 --></div>
+        <ul class="news-list">
+          <li><div class="news-item"><a href="#">商品を買うと店舗ごと消えて別の惑星にワープする「一店一惑星」販売</a></div><div class="meta"><span class="badge">EC</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">ネット通販で注文した物が注文者の「理想の自分」に変身して届く</a></div><div class="meta"><span class="badge">配送</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">レビューが実際の商品を変える力を持ち、星1つでサイズが縮む</a></div><div class="meta"><span class="badge">レビュー</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">買い物カートに入れたらその場で現金が増える逆マネー効果</a></div><div class="meta"><span class="badge">経済</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">返品すると世界の一部が巻き戻る「時空返品」サービス</a></div><div class="meta"><span class="badge">返品</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">店舗で試着すると試着した服が店ごと生態系に変化する</a></div><div class="meta"><span class="badge">試着</span><span class="time">ネタ</span></div></li>
+        </ul>
       </div></div>
     </section>
 
@@ -436,11 +404,14 @@
     <section id="page-auction" class="page" aria-labelledby="auction-title">
       <h3 id="auction-title" class="page-title">オークション</h3>
       <div class="card"><div class="body">
-        <form class="form-row" onsubmit="event.preventDefault();">
-          <input type="text" placeholder="キーワード" aria-label="オークション検索" />
-          <button type="submit">検索</button>
-        </form>
-        <div id="auction-result"><!-- 出品一覧 --></div>
+        <ul class="news-list">
+          <li><div class="news-item"><a href="#">オークションで「時間の一部」を競り落とす商品が登場</a></div><div class="meta"><span class="badge">オークション</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">隕石や月面の石が気軽に出品され、落札者は所有権と引き換えに月の重力を持つ</a></div><div class="meta"><span class="badge">宇宙</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">オークション終了と同時に落札物が現実から消える「儚い落札」</a></div><div class="meta"><span class="badge">希少性</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">価格が上がるたびに出品者の年齢が若返る仕組み</a></div><div class="meta"><span class="badge">メカニズム</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">入札が感情で行われ、盛り上がるほど商品の色が変わる</a></div><div class="meta"><span class="badge">感情AI</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">終了直前にオークション会場が空中浮遊してしまう“空中決済”モード</a></div><div class="meta"><span class="badge">決済</span><span class="time">ネタ</span></div></li>
+        </ul>
       </div></div>
     </section>
 
@@ -448,11 +419,14 @@
     <section id="page-travel" class="page" aria-labelledby="travel-title">
       <h3 id="travel-title" class="page-title">トラベル</h3>
       <div class="card"><div class="body">
-        <form class="form-row" onsubmit="event.preventDefault();">
-          <input type="text" placeholder="行き先・ホテル名など" aria-label="旅行検索" />
-          <button type="submit">検索</button>
-        </form>
-        <div id="travel-result"><!-- 旅行プラン/宿検索の結果 --></div>
+        <ul class="news-list">
+          <li><div class="news-item"><a href="#">タイムトラベルツアー、明日の朝に戻る「一泊で歴史見学」パッケージ発売</a></div><div class="meta"><span class="badge">旅行</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">飛行機で地球を一周すると乗客の影だけが残って帰ってこない</a></div><div class="meta"><span class="badge">航空</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">観光地が実は移動式で、行くたびに場所が変わるサプライズ旅行</a></div><div class="meta"><span class="badge">観光</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">ホテルに泊まると滞在中に現実がアップデートされ最新バージョンになる</a></div><div class="meta"><span class="badge">宿泊</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">ツアーに参加すると帰りは別の人生を選べる分岐点で降ろされる</a></div><div class="meta"><span class="badge">ツアー</span><span class="time">ネタ</span></div></li>
+          <li><div class="news-item"><a href="#">ガイドが未来から来た自分で、旅行中に自分の未来を観光できる</a></div><div class="meta"><span class="badge">ガイド</span><span class="time">ネタ</span></div></li>
+        </ul>
       </div></div>
     </section>
 
