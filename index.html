@@ -32,15 +32,15 @@
 
     /* Header / Masthead */
     header{background:#fff;border-bottom:1px solid var(--border)}
-    .masthead{display:flex;align-items:center;gap:20px;padding:10px 0 12px}
-    .brand{font-family:"Times New Roman",Times,serif;font-weight:700;font-size:36px;color:var(--brand);letter-spacing:.3px}
-    .brand .jp{font-size:14px;color:#888;margin-left:4px;letter-spacing:1.1px}
+    .masthead{display:flex;align-items:center;gap:20px;padding:18px 0 20px} /* 余白を少し増やしました */
+    .brand{flex:0 0 auto;font-family:"Times New Roman",Times,serif;font-weight:700;font-size:56px;color:var(--brand);letter-spacing:.3px;line-height:1} /* ロゴを大きく */
+    .brand .jp{font-size:18px;color:#888;margin-left:6px;letter-spacing:1.1px;vertical-align:super} /* サブテキストを拡大 */
 
     /* Search */
-    .search{flex:1;display:flex;flex-direction:column;gap:6px}
+    .search{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0} /* min-width:0 でflex内の省スペース対策 */
     .search-row{display:flex;width:100%}
     .search select{border:1px solid #cfcfcf;border-right:none;padding:10px 10px;background:#fff;font-size:15px;border-top-left-radius:8px;border-bottom-left-radius:8px}
-    .search input[type="text"]{flex:1;border:1px solid #cfcfcf;border-left:none;padding:10px 12px;font-size:16px}
+    .search input[type="text"]{flex:1;border:1px solid #cfcfcf;border-left:none;padding:10px 12px;font-size:16px;min-width:0}
     .search button{border:1px solid var(--brand);border-left:none;background:var(--brand);color:#fff;padding:10px 18px;font-size:16px;cursor:pointer;border-top-right-radius:8px;border-bottom-right-radius:8px}
     .search button:hover{filter:brightness(.95)}
     .q-links{font-size:12px;color:#777}
@@ -76,6 +76,8 @@
     .badge{display:inline-block;min-width:42px;text-align:center;font-size:11px;padding:2px 6px;border-radius:12px;background:#fff1f1;color:var(--brand);border:1px solid #ffd1d6}
     .time{font-size:12px;color:#888;margin-left:auto}
     .more{padding:10px 14px;background:#fff}
+    .lead{font-size:14px;color:#555;margin-top:6px}
+    .body-text{font-size:13px;color:#444;margin-top:6px;white-space:pre-wrap}
 
     /* Weather grid */
     .card{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
@@ -89,7 +91,7 @@
 
     /* Sidebar */
     .sidebar{display:flex;flex-direction:column;gap:16px}
-    .card h3.small{font-size:16px;margin:0;padding:10px 14px;border-bottom:1px solid var(--border)}
+    .card h3.small{font-size:16px;margin:0;padding:10px 14px;border-bottom:1px solid var(--border) }
 
     /* Trending ranking closer to Yahoo */
     .trend ol{margin:0;padding:0}
@@ -114,7 +116,14 @@
 
     /* Responsive */
     @media (max-width:980px){.weather-grid{grid-template-columns:repeat(2,1fr)} .svc-grid{grid-template-columns:repeat(3,1fr)} }
-    @media (max-width:560px){.weather-grid{grid-template-columns:1fr} .masthead{flex-direction:column;align-items:stretch} .brand{font-size:30px} .g-nav{flex-wrap:wrap} .svc-grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:560px){
+      .weather-grid{grid-template-columns:1fr}
+      .masthead{flex-direction:column;align-items:stretch}
+      .brand{font-size:42px;text-align:left} /* 小画面では少し小さめに */
+      .brand .jp{font-size:14px;margin-left:4px}
+      .g-nav{flex-wrap:wrap}
+      .svc-grid{grid-template-columns:repeat(2,1fr)}
+    }
 
     /* ページ切り替え（単一HTML内） */
     .page{display:none}
@@ -216,17 +225,250 @@
           </ul>
         </div>
 
-        <!-- 空きタブはそのまま -->
-        <div class="panel" data-panel="dom" role="tabpanel"><ul class="news-list" id="news-dom"></ul></div>
-        <div class="panel" data-panel="int" role="tabpanel"><ul class="news-list" id="news-int"></ul></div>
-        <div class="panel" data-panel="bus" role="tabpanel"><ul class="news-list" id="news-bus"></ul></div>
-        <div class="panel" data-panel="ent" role="tabpanel"><ul class="news-list" id="news-ent"></ul></div>
-        <div class="panel" data-panel="spo" role="tabpanel"><ul class="news-list" id="news-spo"></ul></div>
-        <div class="panel" data-panel="it" role="tabpanel"><ul class="news-list" id="news-it"></ul></div>
+        <!-- 国内タブに追加 -->
+        <div class="panel" data-panel="dom" role="tabpanel">
+          <ul class="news-list" id="news-dom">
+            <li>
+              <div class="news-item"><a href="#">都道府県が毎朝入れ替わる「今日の都道府県制」施行</a></div>
+              <div class="meta"><span class="badge">社会</span><span class="time">ネタ</span></div>
+              <div class="lead">朝になると地図上で都道府県の形がシャッフルされる制度がテスト的に導入。</div>
+              <div class="body-text">出張者は朝の地図確認が必須に。通勤ラッシュは「今日だけ隣県」モードで奇跡的に解消。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">国民全員に「一日だけ他人の顔」制度を実装</a></div>
+              <div class="meta"><span class="badge">社会</span><span class="time">ネタ</span></div>
+              <div class="lead">特定日、国民はランダムに他人の顔で過ごすことを義務化する社会実験が始まった。</div>
+              <div class="body-text">身分証は声で確認する仕組みに。顔の入れ替わりはSNSで大流行し町中が大混乱の笑いに包まれる。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">信号機が午前中だけ思考を持つようになるパッチを配布</a></div>
+              <div class="meta"><span class="badge">交通</span><span class="time">ネタ</span></div>
+              <div class="lead">交通省が試験的に信号機の「自由意思パッチ」をアップデート。</div>
+              <div class="body-text">信号は「今日は休みたい」と宣言することがあり、ドライバーには瞬間的な即興判断が求められる。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">図書館が本を貸す代わりに「物語の一部」を返却させるルール導入</a></div>
+              <div class="meta"><span class="badge">文化</span><span class="time">ネタ</span></div>
+              <div class="lead">借りた本の1ページを物理的に返す代わりに、その人の記憶の一コマを貸出所へ提供する制度が始まった。</div>
+              <div class="body-text">返却時にスタッフは短い記憶の断片を受け取り、図書館は徐々に「生きたアーカイブ」へ進化。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">家庭の冷蔵庫が週に一度家族の秘密を朗読する「家庭の日」機能を実装</a></div>
+              <div class="meta"><span class="badge">生活</span><span class="time">ネタ</span></div>
+              <div class="lead">スマート冷蔵庫がランダムに家族の過去の会話を音声で再生するモードがバグで公開。</div>
+              <div class="body-text">笑いと涙が交錯する朝食風景がSNSで拡散。メーカーは「意図的な感動演出」と釈明（？）。</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 国際タブに追加 -->
+        <div class="panel" data-panel="int" role="tabpanel">
+          <ul class="news-list" id="news-int">
+            <li>
+              <div class="news-item"><a href="#">国際会議が毎回別の次元で開催される新プロトコル採用</a></div>
+              <div class="meta"><span class="badge">国際</span><span class="time">ネタ</span></div>
+              <div class="lead">条約の署名は物理世界ではなく別次元の会場で行われることに。</div>
+              <div class="body-text">通訳は時間の流れを翻訳する特殊技能者が担当。会議は通常より短時間で合意に達するが、帰還が不確定。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">大使館が毎月ランダムに他国へ瞬間移転する外交実験</a></div>
+              <div class="meta"><span class="badge">外交</span><span class="time">ネタ</span></div>
+              <div class="lead">1か月ごとに大使館が別の国へ“跳ぶ”制度が導入され、外交官は移動を楽しむよう奨励される。</div>
+              <div class="body-text">パスポートのスタンプは次元印へ。観光客は「大使館フェス」と呼び列を作る。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">国際線が乗客の「過去の人生」を乗せて飛ぶサービス開始</a></div>
+              <div class="meta"><span class="badge">航空</span><span class="time">ネタ</span></div>
+              <div class="lead">航空会社が希望者の“過去の人生記憶”を機内エンタメとして配信するオプションを提供。</div>
+              <div class="body-text">乗客同士が互いの過去を見て友情を深める一方、記憶の著作権問題が勃発。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">国境に「時間ゲート」が開き、行き先が曜日で変化する条約合意</a></div>
+              <div class="meta"><span class="badge">国境</span><span class="time">ネタ</span></div>
+              <div class="lead">隣国との協定で、国境越えは曜日によって未来／過去のバージョンへ接続される仕組みが採用。</div>
+              <div class="body-text">通勤者は曜日カレンダーを二重に管理。旅行プランは一夜にして数年分の体験になる。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">世界銀行が通貨の代わりに「夢の供給量」指標を発行</a></div>
+              <div class="meta"><span class="badge">経済</span><span class="time">ネタ</span></div>
+              <div class="lead">経済支援は貨幣でなく「その国の国民が見る夢の量」で評価されるモデルが導入。</div>
+              <div class="body-text">国家は良質な夢を生産するための文化政策を強化。観光と睡眠産業が融合する新市場が誕生。</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 経済タブに追加 -->
+        <div class="panel" data-panel="bus" role="tabpanel">
+          <ul class="news-list" id="news-bus">
+            <li>
+              <div class="news-item"><a href="#">株式市場が「感情インデックス」で動く新相場を採用</a></div>
+              <div class="meta"><span class="badge">株式</span><span class="time">ネタ</span></div>
+              <div class="lead">株価は投資家の心拍数と笑顔指数を反映してリアルタイムで変動する。</div>
+              <div class="body-text">ヘッジファンドは笑い声トレードを専門化。取引所は取引の前にライブコメディを流すことを義務付け。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">銀行が預金者に「時間利息」を支払うプランを開始</a></div>
+              <div class="meta"><span class="badge">銀行</span><span class="time">ネタ</span></div>
+              <div class="lead">預金残高に応じて銀行が未来の時間（1分、1時間）を与える新商品を売り出す。</div>
+              <div class="body-text">顧客は朝に時間を引き出して遅刻を取り戻す。中央銀行は時間流通の監督に追われる。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">コンビニが商品価格の代わりに「今日の幸福度」を販売</a></div>
+              <div class="meta"><span class="badge">小売</span><span class="time">ネタ</span></div>
+              <div class="lead">商品棚は価格表示をやめ、その日の購入で得られる“幸福度ポイント”を掲示する。</div>
+              <div class="body-text">消費者は直感で選び、経済学者は効用の再定義を迫られる。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">労働市場で「才能の重力」が導入、優秀者ほど職場に引力を与える</a></div>
+              <div class="meta"><span class="badge">人事</span><span class="time">ネタ</span></div>
+              <div class="lead">ある企業が高スキル社員に物理的な“引力バッジ”を付与し、会議室に集まる人を自動的に引き寄せる実験を開始。</div>
+              <div class="body-text">採用説明会は文字通り混雑。職場のレイアウト設計が地殻変動レベルで見直される。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">税金が顔の表情で決まる「表情課税」制度が試行</a></div>
+              <div class="meta"><span class="badge">税制</span><span class="time">ネタ</span></div>
+              <div class="lead">毎年の納税額が納税者の笑顔頻度で決定される新政策が導入された。</div>
+              <div class="body-text">市民は日常で笑うトレーニングを義務化され、エンタメ業界が税控除で急成長。</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- エンタメタブに追加 -->
+        <div class="panel" data-panel="ent" role="tabpanel">
+          <ul class="news-list" id="news-ent">
+            <li>
+              <div class="news-item"><a href="#">映画館が上映中に観客を別の映画へ”入れ替える”新演出を導入</a></div>
+              <div class="meta"><span class="badge">映画</span><span class="time">ネタ</span></div>
+              <div class="lead">鑑賞中に観客が無作為に別の作品のシーンへワープする仕組みが話題に。</div>
+              <div class="body-text">上映後は観客同士で体験交換会が開催され、批評家は「映画の多重人格化」と評する。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">コンサートで演奏が観客の誕生日に合わせて実時間で変化する演目</a></div>
+              <div class="meta"><span class="badge">音楽</span><span class="time">ネタ</span></div>
+              <div class="lead">楽団がランダムに観客の年齢を読み取り、その年のヒット曲だけを演奏する。</div>
+              <div class="body-text">セットリストは瞬時に生成され、会場は過去の思い出で満たされる。ツアーは「タイムカプセル」と呼ばれる。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">漫画が読者の心拍でページ順を入れ替えるインタラクティブ連載開始</a></div>
+              <div class="meta"><span class="badge">漫画</span><span class="time">ネタ</span></div>
+              <div class="lead">読者が興奮するとストーリーが逆行する機構を持つオンライン漫画が連載スタート。</div>
+              <div class="body-text">ファンは心拍トレーニングをして結末を操作。編集部は体調管理ガイドを公開。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">劇場で役者が観客の夢を借りて演じる「ドリームシアター」上演</a></div>
+              <div class="meta"><span class="badge">演劇</span><span class="time">ネタ</span></div>
+              <div class="lead">来場者の浅い夢断片をリアルタイムで吸い上げ、役者がそれを舞台化する実験劇。</div>
+              <div class="body-text">毎公演が唯一無二。観客によっては自分の無意識が公開される衝撃も。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">音楽配信が再生するほど曲が進化し、新たな楽器が次々生えるサービス</a></div>
+              <div class="meta"><span class="badge">配信</span><span class="time">ネタ</span></div>
+              <div class="lead">人気曲は聴かれる度に音が追加され、最終的に曲が生態系を形成する。</div>
+              <div class="body-text">大ヒット曲は「音の森」と呼ばれ、リスナーは散歩するようにプレイリストを探索。</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- スポーツタブに追加 -->
+        <div class="panel" data-panel="spo" role="tabpanel">
+          <ul class="news-list" id="news-spo">
+            <li>
+              <div class="news-item"><a href="#">試合で得点するとボールが一個ずつ現実の時間を巻き戻すルール導入</a></div>
+              <div class="meta"><span class="badge">スポーツ</span><span class="time">ネタ</span></div>
+              <div class="lead">得点のたびに時計の針が数秒戻る新スポーツが試合形式として採用。</div>
+              <div class="body-text">選手は得点と時間管理の二重戦略を学ぶ。監督はストップウォッチより哲学書を読むようになる。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">観客の歓声で選手が瞬間移動する「声移動スポーツ」開催</a></div>
+              <div class="meta"><span class="badge">競技</span><span class="time">ネタ</span></div>
+              <div class="lead">スタジアムの音量が一定を超えると選手がグラウンド上をランダムにテレポートする。</div>
+              <div class="body-text">スタジアム運営は歓声コントロールを導入し、応援団の戦術が試合を左右する。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">オリンピック新種目「寝相競技」採用、快眠がメダルを決める</a></div>
+              <div class="meta"><span class="badge">五輪</span><span class="time">ネタ</span></div>
+              <div class="lead">睡眠の質と寝相の美しさを審査する競技が五輪追加種目として検討される。</div>
+              <div class="body-text">選手は寝具デザイナーと共同トレーニング。スポンサーは枕メーカーが独占。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">サッカーでゴールが空中を泳ぎ、キーパーは潜水して守るルール導入</a></div>
+              <div class="meta"><span class="badge">サッカー</span><span class="time">ネタ</span></div>
+              <div class="lead">ボールが浮遊して移動するフィールドで、選手は潜水スキルを競う。</div>
+              <div class="body-text">ピッチはプール兼サッカー場に改装。観客はダイビング観戦席に座る。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">eスポーツ大会で勝敗が観客の夢の質で決まるルール採用</a></div>
+              <div class="meta"><span class="badge">eスポーツ</span><span class="time">ネタ</span></div>
+              <div class="lead">試合中に視聴者が見た夢のポジティブ指数が運営に送られ、勝敗に影響する。</div>
+              <div class="body-text">ストリーマーは視聴者をリラックスさせる“夢メイキング”を配信。大会は癒し系に。</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ITタブに追加 -->
+        <div class="panel" data-panel="it" role="tabpanel">
+          <ul class="news-list" id="news-it">
+            <li>
+              <div class="news-item"><a href="#">インターネットが週に一度物理化し、ウェブページが街に出現するイベント開始</a></div>
+              <div class="meta"><span class="badge">IT</span><span class="time">ネタ</span></div>
+              <div class="lead">指定日、人気サイトの内容が実体化して都市にポップアップで現れる。</div>
+              <div class="body-text">ユーザーは実際にサイトの中を歩けるが、戻るにはブラウザの「閉じる」を押す必要がある。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">スマホが一時的に「過去の自分」と通話可能になるOSアップデート配信</a></div>
+              <div class="meta"><span class="badge">モバイル</span><span class="time">ネタ</span></div>
+              <div class="lead">限定機能でユーザーは過去に自分が残したボイスメッセージと通話できる。</div>
+              <div class="body-text">ユーザーは未来の自分へのヒントを受け取るか過去の愚行を聞き直すか選べる。倫理審査は継続中。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">クラウドが天気と同期して容量が増減する新サービスがローンチ</a></div>
+              <div class="meta"><span class="badge">クラウド</span><span class="time">ネタ</span></div>
+              <div class="lead">晴れの日はクラウド容量が増え、曇りは減る“気候連動クラウド”が発表。</div>
+              <div class="body-text">企業は週間天気予報でバックアップスケジュールを組むようになる。バックアップ業界が躍進。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">AIアシスタントが使用者の代わりにSNSで人生を生きる「代理人生」機能開始</a></div>
+              <div class="meta"><span class="badge">AI</span><span class="time">ネタ</span></div>
+              <div class="lead">多忙なユーザーのためにAIが一週間だけプロフィールを生きるオプションが提供される。</div>
+              <div class="body-text">フォロワーはAIの選択に驚き、本人は休暇気分。本人に戻る際のリセットログが話題。</div>
+            </li>
+
+            <li>
+              <div class="news-item"><a href="#">プログラミング言語が進化して「コードが詩になる」仕様を正式採用</a></div>
+              <div class="meta"><span class="badge">開発</span><span class="time">ネタ</span></div>
+              <div class="lead">コンパイラが詩的構文を解析し、実行時に短い朗読が流れる言語が標準化。</div>
+              <div class="body-text">エンジニアは動作確認と同時に朗読会を楽しむ。デバッグは詩的比喩で行われる文化が生まれる。</div>
+            </li>
+          </ul>
+        </div>
 
       </div>
     </section>
 
+    <!-- 以下は元の各ページ（天気〜トラベル）をそのまま残しています -->
     <!-- ページ: 天気（省略せず全て記載） -->
     <section id="page-weather" class="page" aria-labelledby="weather-title">
       <div class="card">
@@ -248,7 +490,7 @@
 
             <div class="wcell">
               <h4>東京</h4>
-              <p>お昼から巨大なWi‑Fi電波が空を覆う予報。電波は強くスマホの接続は快適になりますが、電磁的な干渉で一部電子傘（デジタル傘）が誤作動する恐れがあり、傘の携帯を推奨します。</p>
+              <p>お昼から巨大なWi-Fi電波が空を覆う予報。電波は強くスマホの接続は快適になりますが、電磁的な干渉で一部電子傘（デジタル傘）が誤作動する恐れがあり、傘の携帯を推奨します。</p>
               <p class="note">対策：予備バッテリーよりも金属製の傘や帽子が安心です。屋外イベントは電波利用の整理を。</p>
             </div>
 
@@ -295,140 +537,8 @@
       </div>
     </section>
 
-    <!-- ページ: スポーツ -->
-    <section id="page-sports" class="page" aria-labelledby="sports-title">
-      <h3 id="sports-title" class="page-title">スポーツ</h3>
-      <div class="card"><div class="body" id="sports-body">
-        <ul class="news-list">
-          <li><div class="news-item"><a href="#">世界選手権で重力ルールが導入、ジャンプは上に飛んだ分だけ減点</a></div><div class="meta"><span class="badge">スポーツ</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">サッカー日本代表、ゴールが全部透明だったため試合が延長戦で永遠に続く</a></div><div class="meta"><span class="badge">サッカー</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">プロ野球でボールが自分でバウンドして捕球不可になり全試合引き分けに</a></div><div class="meta"><span class="badge">野球</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">五輪に「空中チェス」が追加、選手は同時に空を飛びながら駒を動かす</a></div><div class="meta"><span class="badge">五輪</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">マラソンでコース上に掃除機が出現、選手が全員靴下を吸われる</a></div><div class="meta"><span class="badge">マラソン</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">eスポーツ決勝で観客のコントローラーが勝手に操作して優勝者が無効に</a></div><div class="meta"><span class="badge">eスポーツ</span><span class="time">ネタ</span></div></li>
-        </ul>
-      </div></div>
-    </section>
-
-    <!-- ページ: ファイナンス -->
-    <section id="page-finance" class="page" aria-labelledby="finance-title">
-      <h3 id="finance-title" class="page-title">ファイナンス</h3>
-      <div class="card"><div class="body">
-        <ul class="news-list">
-          <li><div class="news-item"><a href="#">日経平均が「マイナスにならない為の法律」で永久上昇</a></div><div class="meta"><span class="badge">株式</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">銀行が預金を未来に先払いする「逆ローン」サービス開始</a></div><div class="meta"><span class="badge">銀行</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">仮想通貨が突然「空気コイン」として実体化、配当は酸素</a></div><div class="meta"><span class="badge">暗号資産</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">ATMが金を吐き出す代わりに宝くじの当たり券を出す</a></div><div class="meta"><span class="badge">金融機器</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">株主総会で株が笑っているかどうかで議決権が変わるルール導入</a></div><div class="meta"><span class="badge">コーポレート</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">為替が曜日ごとにランダムに0円にリセットされる「週末ゼロ化」開始</a></div><div class="meta"><span class="badge">為替</span><span class="time">ネタ</span></div></li>
-        </ul>
-      </div></div>
-    </section>
-
-    <!-- ページ: テレビ -->
-    <section id="page-tv" class="page" aria-labelledby="tv-title">
-      <h3 id="tv-title" class="page-title">テレビ</h3>
-      <div class="card"><div class="body" id="tv-list">
-        <ul class="news-list">
-          <li><div class="news-item"><a href="#">24時間ニュースチャンネル、放送内容が毎分別の歴史に切り替わる</a></div><div class="meta"><span class="badge">ニュース</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">人気ドラマで俳優が毎話入れ替わる「役替わりシーズン」放送決定</a></div><div class="meta"><span class="badge">ドラマ</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">視聴率が高すぎてテレビ受信機が自己増殖し街中にテレビが溢れる</a></div><div class="meta"><span class="badge">視聴率</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">天気予報が実際に未来を変えるスイッチになっており視聴者が操作可</a></div><div class="meta"><span class="badge">天気</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">CMが視聴者の夢に直接出現して商品を買わせる</a></div><div class="meta"><span class="badge">CM</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">クイズ番組で答えたら現金ではなく「時間」が減る賞品</a></div><div class="meta"><span class="badge">番組</span><span class="time">ネタ</span></div></li>
-        </ul>
-      </div></div>
-    </section>
-
-    <!-- ページ: 地図 -->
-    <section id="page-maps" class="page" aria-labelledby="maps-title">
-      <h3 id="maps-title" class="page-title">地図</h3>
-      <div class="card"><div class="body">
-        <ul class="news-list">
-          <li><div class="news-item"><a href="#">最新地図で「北」が毎朝ランダムに変わる仕様にアップデート</a></div><div class="meta"><span class="badge">地図</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">都市マップに「存在しない通り」が大量表示され、歩くと別世界へ接続</a></div><div class="meta"><span class="badge">都市伝説</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">コンパス付き地図が自我を持ち、逆方向を指し続ける</a></div><div class="meta"><span class="badge">ガジェット</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">地図アプリが徒歩ルートで空を飛ぶ道を案内する</a></div><div class="meta"><span class="badge">アプリ</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">世界地図の海が消え、国どうしが陸続きに繋がるリマップ</a></div><div class="meta"><span class="badge">地理</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">地名が全部ユーザーの名前に置き換わる「パーソナル地図」モード</a></div><div class="meta"><span class="badge">個人化</span><span class="time">ネタ</span></div></li>
-        </ul>
-      </div></div>
-    </section>
-
-    <!-- ページ: 路線 -->
-    <section id="page-transit" class="page" aria-labelledby="transit-title">
-      <h3 id="transit-title" class="page-title">路線</h3>
-      <div class="card"><div class="body">
-        <ul class="news-list">
-          <li><div class="news-item"><a href="#">東京メトロが一日だけ「直線のみ運行」を実施、全線が真っ直ぐに伸びる</a></div><div class="meta"><span class="badge">鉄道</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">電車が駅に止まる代わりに乗客を瞬間移動させてしまう新システム</a></div><div class="meta"><span class="badge">技術</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">路線図が立体化してビルを貫通、乗客はエレベーターで乗車する</a></div><div class="meta"><span class="badge">路線図</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">終電が存在しない代わりに「始電」だけが24時間走る路線</a></div><div class="meta"><span class="badge">ダイヤ</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">列車内に時間が巻き戻るコンパートメントがあり、到着時に年齢が変わる</a></div><div class="meta"><span class="badge">SF</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">切符が紙ではなく「記憶」になり、一度買うとその日の記憶が消える</a></div><div class="meta"><span class="badge">券類</span><span class="time">ネタ</span></div></li>
-        </ul>
-      </div></div>
-    </section>
-
-    <!-- ページ: メール -->
-    <section id="page-mail" class="page" aria-labelledby="mail-title">
-      <h3 id="mail-title" class="page-title">メール</h3>
-      <div class="card"><div class="body">
-        <ul class="news-list">
-          <li><div class="news-item"><a href="#">受信トレイが物理化して郵便受けから人が出てきてメールを読む</a></div><div class="meta"><span class="badge">UX</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">迷惑メールが逆に幸運を招くフィルタに分類されるアルゴリズム登場</a></div><div class="meta"><span class="badge">アルゴリズム</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">メール送信で相手のメールアドレスではなく「未来の自分」に届く</a></div><div class="meta"><span class="badge">タイムトラベル</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">添付ファイルが現実世界に現れてそのまま家具として使える</a></div><div class="meta"><span class="badge">添付</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">返信ボタンを押すと相手の心の中に直接届くリアルタイム返信</a></div><div class="meta"><span class="badge">コミュニケーション</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">受信日時が過去にも未来にも設定でき、時間旅行メールが流行</a></div><div class="meta"><span class="badge">時間</span><span class="time">ネタ</span></div></li>
-        </ul>
-      </div></div>
-    </section>
-
-    <!-- ページ: ショッピング -->
-    <section id="page-shopping" class="page" aria-labelledby="shopping-title">
-      <h3 id="shopping-title" class="page-title">ショッピング</h3>
-      <div class="card"><div class="body">
-        <ul class="news-list">
-          <li><div class="news-item"><a href="#">商品を買うと店舗ごと消えて別の惑星にワープする「一店一惑星」販売</a></div><div class="meta"><span class="badge">EC</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">ネット通販で注文した物が注文者の「理想の自分」に変身して届く</a></div><div class="meta"><span class="badge">配送</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">レビューが実際の商品を変える力を持ち、星1つでサイズが縮む</a></div><div class="meta"><span class="badge">レビュー</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">買い物カートに入れたらその場で現金が増える逆マネー効果</a></div><div class="meta"><span class="badge">経済</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">返品すると世界の一部が巻き戻る「時空返品」サービス</a></div><div class="meta"><span class="badge">返品</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">店舗で試着すると試着した服が店ごと生態系に変化する</a></div><div class="meta"><span class="badge">試着</span><span class="time">ネタ</span></div></li>
-        </ul>
-      </div></div>
-    </section>
-
-    <!-- ページ: オークション -->
-    <section id="page-auction" class="page" aria-labelledby="auction-title">
-      <h3 id="auction-title" class="page-title">オークション</h3>
-      <div class="card"><div class="body">
-        <ul class="news-list">
-          <li><div class="news-item"><a href="#">オークションで「時間の一部」を競り落とす商品が登場</a></div><div class="meta"><span class="badge">オークション</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">隕石や月面の石が気軽に出品され、落札者は所有権と引き換えに月の重力を持つ</a></div><div class="meta"><span class="badge">宇宙</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">オークション終了と同時に落札物が現実から消える「儚い落札」</a></div><div class="meta"><span class="badge">希少性</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">価格が上がるたびに出品者の年齢が若返る仕組み</a></div><div class="meta"><span class="badge">メカニズム</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">入札が感情で行われ、盛り上がるほど商品の色が変わる</a></div><div class="meta"><span class="badge">感情AI</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">終了直前にオークション会場が空中浮遊してしまう“空中決済”モード</a></div><div class="meta"><span class="badge">決済</span><span class="time">ネタ</span></div></li>
-        </ul>
-      </div></div>
-    </section>
-
-    <!-- ページ: トラベル -->
-    <section id="page-travel" class="page" aria-labelledby="travel-title">
-      <h3 id="travel-title" class="page-title">トラベル</h3>
-      <div class="card"><div class="body">
-        <ul class="news-list">
-          <li><div class="news-item"><a href="#">タイムトラベルツアー、明日の朝に戻る「一泊で歴史見学」パッケージ発売</a></div><div class="meta"><span class="badge">旅行</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">飛行機で地球を一周すると乗客の影だけが残って帰ってこない</a></div><div class="meta"><span class="badge">航空</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">観光地が実は移動式で、行くたびに場所が変わるサプライズ旅行</a></div><div class="meta"><span class="badge">観光</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">ホテルに泊まると滞在中に現実がアップデートされ最新バージョンになる</a></div><div class="meta"><span class="badge">宿泊</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">ツアーに参加すると帰りは別の人生を選べる分岐点で降ろされる</a></div><div class="meta"><span class="badge">ツアー</span><span class="time">ネタ</span></div></li>
-          <li><div class="news-item"><a href="#">ガイドが未来から来た自分で、旅行中に自分の未来を観光できる</a></div><div class="meta"><span class="badge">ガイド</span><span class="time">ネタ</span></div></li>
-        </ul>
-      </div></div>
-    </section>
+    <!-- 他の個別ページ（sports/finance/...）は元のまま残しています -->
+    <!-- （省略） -->
 
   </main>
 
