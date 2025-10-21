@@ -3,148 +3,148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yanoo! JAPAN</title>
-  <meta name="description" content="Yanoo! JAPAN は Yahoo! JAPAN 風のデモページです。実在のサービス・画像・商標は使用していません。"/>
+  <title>Yanoo! JAPAN — v4</title>
+  <meta name="description" content="Yanoo! JAPAN は Yahoo! JAPAN を参考にしたパロディ風デモ。実在のサービス・画像・商標は使用していません。"/>
   <style>
+    /* ===============
+       THEME（V2のUIに戻す）
+    =============== */
     :root{
-      --brand:#e60012; /* Brand red */
-      --ink:#111;
-      --ink-2:#555;
-      --link:#0645ad;
-      --bg:#ffffff;
-      --ui:#f7f7f7;
-      --border:#e5e5e5;
-      --hover:#f0f0f0;
+      --brand: #ff3b30;           /* 鮮やかなレッド系 */
+      --brand-2: #ff6b6b;
+      --ink: #0f172a;             /* slate-900 */
+      --ink-2: #475569;           /* slate-600 */
+      --bg: #f7f7fb;              /* 明るい灰紫 */
+      --panel: #ffffff;
+      --border: #e7e7f1;
+      --hover: #f1f1fb;
+      --chip: #eef2ff;
       --up:#128a0c; --down:#b30000;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(20,16,60,.08);
     }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --ink:#e5e7eb; --ink-2:#a5b4fc; --bg:#0b0b12; --panel:#101018; --border:#1c1c26; --hover:#161622; --chip:#1f1f2d;
+        --shadow: 0 10px 30px rgba(3,3,10,.5);
+      }
+    }
+
+    /* Reset */
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,Meiryo,"Yu Gothic","Hiragino Kaku Gothic ProN",system-ui,sans-serif;line-height:1.45}
-    a{color:var(--ink);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Meiryo,"Yu Gothic",system-ui,sans-serif;line-height:1.55}
+    a{color:inherit;text-decoration:none}
+    a:hover{opacity:.9}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 18px}
 
-    /* Topbar */
-    .topbar{display:flex;gap:12px;align-items:center;justify-content:flex-end;height:36px;font-size:13px;color:var(--ink-2)}
+    /* Top utility */
+    .topbar{display:flex;gap:14px;align-items:center;justify-content:flex-end;height:42px;font-size:13px;color:var(--ink-2)}
     .topbar a{color:inherit}
-    .topbar .sep{color:#ddd}
-    .topbar .strong{font-weight:700}
+    .topbar .sep{opacity:.35}
 
-    /* Header / Masthead */
-    header{background:#fff;border-bottom:1px solid var(--border)}
-    .masthead{display:flex;align-items:center;gap:20px;padding:18px 0 20px}
-    .brand{flex:0 0 auto;display:flex;align-items:center;gap:10px}
-    
-    .brand .brand-text{font-family:"Times New Roman",Times,serif;font-weight:700;font-size:44px;color:var(--brand);letter-spacing:.3px;line-height:1}
-    .brand .jp{font-size:16px;color:#888;margin-left:6px;letter-spacing:1.1px;vertical-align:super}
+    /* HEADER */
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,.5));backdrop-filter:saturate(1.3) blur(6px);border-bottom:1px solid var(--border)}
+    @media (prefers-color-scheme: dark){
+      header{background:linear-gradient(180deg,rgba(16,16,24,.8),rgba(16,16,24,.6));}
+    }
+
+    .masthead{display:flex;align-items:center;gap:18px;padding:14px 0}
+
+    /* Brand mark */
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{display:inline-flex;align-items:center;gap:10px}
+    .logo-badge{inline-size:40px;block-size:40px;border-radius:11px;background:radial-gradient(120% 120% at 0% 0%, var(--brand) 0%, var(--brand-2) 60%, #b8a7ff 100%);box-shadow:var(--shadow);display:grid;place-items:center;color:#fff;font-weight:800;letter-spacing:.5px}
+    .logo-badge span{transform:translateY(1px)}
+    .logo-typemark{font-weight:800;letter-spacing:.2px;font-size:28px;line-height:1}
+    .logo-typemark .em{background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .logo-typemark small{font-size:12px;font-weight:700;color:var(--ink-2);margin-left:8px;letter-spacing:1.2px}
 
     /* Search */
-    .search{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
-    .search-row{display:flex;width:100%}
-    .search select{border:1px solid #cfcfcf;border-right:none;padding:10px 10px;background:#fff;font-size:15px;border-top-left-radius:8px;border-bottom-left-radius:8px}
-    .search input[type="text"]{flex:1;border:1px solid #cfcfcf;border-left:none;padding:10px 12px;font-size:16px;min-width:0}
-    .search button{border:1px solid var(--brand);border-left:none;background:var(--brand);color:#fff;padding:10px 18px;font-size:16px;cursor:pointer;border-top-right-radius:8px;border-bottom-right-radius:8px}
-    .search button:hover{filter:brightness(.95)}
-    .q-links{font-size:12px;color:#777}
-    .q-links a{color:#777;margin-right:10px}
+    .search{flex:1;display:flex;flex-direction:column;gap:8px;min-width:0}
+    .search-row{display:flex;width:100%;background:var(--panel);border:1px solid var(--border);border-radius:999px;overflow:hidden;box-shadow:var(--shadow)}
+    .search select{border:none;padding:12px 14px;background:transparent;font-size:14px}
+    .search input[type="text"]{flex:1;border:none;padding:12px 14px 12px 6px;font-size:16px;min-width:0;background:transparent}
+    .search button{border:none;background:var(--brand);color:#fff;padding:12px 18px;font-size:15px;cursor:pointer;font-weight:700}
+    .q-links{font-size:12px;color:var(--ink-2)}
+    .q-links a{color:inherit;margin-right:12px}
 
     /* Global nav */
-    .g-nav{display:flex;gap:16px;padding:8px 0;background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);font-size:14px}
-    .g-nav a{color:#333;padding:6px 0;position:relative}
-    .g-nav a:hover{color:#000}
-    .g-nav a.active::after,.g-nav a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:3px;background:var(--brand)}
+    .g-nav{display:flex;gap:14px;padding:10px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);font-size:14px;overflow:auto}
+    .g-nav a{color:#555;padding:8px 10px;border-radius:10px}
+    .g-nav a.active{color:#fff;background:linear-gradient(90deg,var(--brand),var(--brand-2))}
+
+    /* Site note */
+    .site-note{margin:0 auto;max-width:1180px;padding:10px 16px;color:#333;background:#fff7e6;border-top:1px solid #ffe0b3;border-bottom:1px solid #ffe0b3;font-size:14px;display:flex;align-items:center;justify-content:space-between}
+    @media (prefers-color-scheme: dark){.site-note{color:#dbcfc0;background:#2a2215;border-color:#3a301f}}
 
     /* Layout */
-    main.wrap{display:block;padding:18px 16px}
+    main.wrap{display:block;padding:20px 0}
 
-    /* News / Tabs */
-    .news{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
-    .news .head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border)}
-    .news .head h2{font-size:18px;margin:0}
-    .joke-note{font-size:12px;color:#999;margin-left:8px}
-    .tabs{display:flex;gap:0}
-    .tabs button{border:none;background:#fff;padding:10px 12px;font-size:14px;cursor:pointer;border-bottom:3px solid transparent}
-    .tabs button:hover{background:var(--ui)}
-    .tabs button.active{border-bottom-color:var(--brand);font-weight:700}
+    /* Cards */
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+    .card h3{font-size:18px;margin:0;padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+    .card .body{padding:14px 16px}
 
-    .panel{display:none;padding:8px 14px 12px}
+    /* News */
+    .news .head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border)}
+    .news .head h2{font-size:18px;margin:0;display:flex;align-items:center;gap:8px}
+    .joke-note{font-size:12px;color:var(--ink-2)}
+
+    .tabs{display:flex;gap:6px}
+    .tabs button{border:none;background:var(--chip);padding:8px 10px;font-size:13px;cursor:pointer;border-radius:999px;color:#cc2b2b;font-weight:700}
+    .tabs button.active{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff}
+
+    .panel{display:none;padding:8px 16px 12px}
     .panel.active{display:block}
+
     .news-list{list-style:none;margin:0;padding:0}
-    .news-list li{display:flex;flex-direction:column;gap:6px;padding:12px 0;border-bottom:1px solid #f2f2f2}
+    .news-list li{display:flex;flex-direction:column;gap:6px;padding:14px 0;border-bottom:1px dashed var(--border)}
     .news-list li:last-child{border-bottom:none}
+
     .news-item{display:flex;gap:12px;align-items:flex-start}
-    .news-item a{color:#111;line-height:1.35;font-size:16px;font-weight:600}
-    .meta{display:flex;gap:8px;align-items:center;margin-top:6px}
-    .badge{display:inline-block;min-width:42px;text-align:center;font-size:11px;padding:2px 6px;border-radius:12px;background:#fff1f1;color:var(--brand);border:1px solid #ffd1d6}
-    .time{font-size:12px;color:#888;margin-left:auto}
-    .more{padding:10px 14px;background:#fff}
-    .lead{font-size:14px;color:#555;margin-top:6px}
-    .body-text{font-size:13px;color:#444;margin-top:6px;white-space:pre-wrap}
+    .news-item a{line-height:1.35;font-size:16px;font-weight:700}
+    .meta{display:flex;gap:10px;align-items:center;margin-top:4px;font-size:12px;color:var(--ink-2)}
+    .badge{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:24px;padding:0 10px;border-radius:999px;background:var(--chip);border:1px solid var(--border);font-weight:700}
+    .time{margin-left:auto;opacity:.7}
+    .lead{font-size:14px;color:var(--ink-2);margin-top:2px}
+    .body-text{font-size:13px;color:var(--ink-2);margin-top:2px;white-space:pre-wrap}
 
-    /* Card */
-    .card{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
-    .card h3{font-size:18px;margin:0;padding:12px 16px;border-bottom:1px solid var(--border)}
-    .card .body{padding:12px 16px}
-
-    /* Weather grid */
+    /* Grids */
     .weather-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .wcell{background:#f9fafb;border:1px solid #eee;padding:12px;border-radius:8px;min-height:120px}
+    .wcell{background:linear-gradient(180deg,rgba(255,255,255,.8),rgba(255,255,255,.7));border:1px solid var(--border);padding:12px;border-radius:12px;min-height:120px}
     .wcell h4{margin:0 0 8px;font-size:16px}
-    .wcell p{margin:0;font-size:14px;color:#333}
-    .note{font-size:12px;color:#999;margin-top:8px}
+    .wcell p{margin:0;font-size:14px}
 
-    /* Sidebar (unused placeholder) */
-    .sidebar{display:flex;flex-direction:column;gap:16px}
-    .card h3.small{font-size:16px;margin:0;padding:10px 14px;border-bottom:1px solid var(--border) }
-
-    /* Trending (unused placeholder) */
-    .trend ol{margin:0;padding:0}
-    .trend li{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f2f2f2}
-    .trend .num{width:22px;height:22px;border-radius:50%;background:#f0f0f0;display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:#555}
-    .trend .word{flex:1}
-    .trend .chg.up{color:var(--up)}
-    .trend .chg.down{color:var(--down)}
-
-    /* Services grid */
-    .services{margin:6px auto 24px}
-    .services h3{font-size:16px;margin:0 0 8px}
-    .svc-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
-    .svc{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px;display:flex;align-items:center;gap:10px}
-    .svc .ico{width:28px;height:28px;border-radius:8px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-weight:700}
-    .svc strong{font-size:14px}
+    /* Services */
+    .services{margin:4px auto 24px}
+    .svc-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+    .svc{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow)}
+    .svc .ico{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
 
     /* Footer */
-    footer{border-top:1px solid var(--border);background:#fff;color:#666}
-    .legal{font-size:12px;text-align:center;color:#888;padding:14px}
-    .small-note{font-size:11px;color:#999;margin-left:6px;vertical-align:middle}
+    footer{border-top:1px solid var(--border);background:var(--panel);color:var(--ink-2)}
+    .legal{font-size:12px;text-align:center;padding:14px}
 
     /* Responsive */
     @media (max-width:980px){.weather-grid{grid-template-columns:repeat(2,1fr)} .svc-grid{grid-template-columns:repeat(3,1fr)} }
-    @media (max-width:560px){
-      .weather-grid{grid-template-columns:1fr}
+    @media (max-width:620px){
       .masthead{flex-direction:column;align-items:stretch}
-      
-      .brand .brand-text{font-size:36px}
-      .brand .jp{font-size:14px;margin-left:4px}
+      .logo-typemark{font-size:24px}
       .g-nav{flex-wrap:wrap}
+      .weather-grid{grid-template-columns:1fr}
       .svc-grid{grid-template-columns:repeat(2,1fr)}
     }
 
-    /* ページ切り替え（単一HTML内） */
+    /* Router */
     .page{display:none}
     .page.active{display:block}
-    .page-title{font-size:18px;margin:0 0 10px}
-    .form-row{display:flex;gap:8px;align-items:center}
-    .form-col{display:flex;flex-direction:column;gap:8px}
-    .form-row input,.form-col input{flex:1;border:1px solid #cfcfcf;padding:10px 12px;font-size:14px}
-    .form-row button,.form-col button{border:1px solid var(--brand);background:var(--brand);color:#fff;padding:10px 16px;border-radius:6px;cursor:pointer}
-    .map-placeholder{height:320px;background:#fafafa;border:1px dashed #ddd;border-radius:8px}
 
-    /* 共通ノート（全ページに表示） */
-    .site-note{margin:0 auto;max-width:1180px;padding:8px 16px;color:#333;background:#fff7e6;border-top:1px solid #ffe0b3;border-bottom:1px solid #ffe0b3;font-size:14px;display:flex;align-items:center;justify-content:space-between}
+    /* Utilities */
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-    /* Utility */
-    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+    /* Floating dark-mode toggle */
+    .theme-toggle{position:fixed;right:14px;bottom:14px;z-index:60;border:none;background:var(--panel);border:1px solid var(--border);padding:10px 12px;border-radius:999px;box-shadow:var(--shadow);cursor:pointer}
   </style>
 </head>
 <body>
@@ -159,9 +159,14 @@
   <header>
     <div class="masthead wrap">
       <div class="brand" aria-label="Yanoo! JAPAN ロゴ">
-        
-        <div class="brand-text">Yanoo! <span class="jp">JAPAN</span></div>
+        <div class="logo">
+          <div class="logo-badge" aria-hidden="true"><span>Ya</span></div>
+          <div class="logo-typemark">
+            <span class="em">Yanoo!</span> <small>JAPAN</small>
+          </div>
+        </div>
       </div>
+
       <form class="search" role="search" onsubmit="event.preventDefault(); alert('これはダミー検索です\n\n入力: ' + (document.getElementById('q').value || '（未入力）')) ;">
         <div class="search-row">
           <label class="visually-hidden" for="type">検索種別</label>
@@ -200,16 +205,16 @@
   </header>
 
   <div class="site-note wrap" role="note">
-    <div>Yanoo! Japanﾀﾞﾖ!ww</div>
-    
+    <div>Yanoo! JAPAN（パロディ・学習用デモ）</div>
+    <div style="font-size:12px;opacity:.8">※非公式サイト／本家とは無関係</div>
   </div>
 
   <main class="wrap" role="main">
-    <!-- ページ: ニュース -->
+    <!-- NEWS -->
     <section id="page-news" class="page active" aria-labelledby="news-title">
-      <div class="news" aria-labelledby="news-title">
+      <div class="news card" aria-labelledby="news-title">
         <div class="head">
-          <h2 id="news-title">主要ニュース</h2>
+          <h2 id="news-title">主要ニュース <span class="joke-note">（全部ネタ）</span></h2>
           <div class="tabs" role="tablist">
             <button class="active" role="tab" aria-selected="true" data-tab="top">主要</button>
             <button role="tab" data-tab="dom">国内</button>
@@ -221,6 +226,7 @@
           </div>
         </div>
 
+        <!-- 主要（V3の内容を維持） -->
         <div class="panel active" data-panel="top" role="tabpanel">
           <ul class="news-list" id="news-top">
             <li><div class="news-item"><a href="#">渋谷スクランブル交差点で巨大ネギ暴走　信号も巻き込みダンス大会に</a></div><div class="meta"><span class="badge">珍事</span><span class="time">今</span></div></li>
@@ -236,7 +242,7 @@
           </ul>
         </div>
 
-        <!-- 国内タブ -->
+        <!-- 国内 -->
         <div class="panel" data-panel="dom" role="tabpanel">
           <ul class="news-list" id="news-dom">
             <li>
@@ -272,7 +278,7 @@
           </ul>
         </div>
 
-        <!-- 国際タブ -->
+        <!-- 国際 -->
         <div class="panel" data-panel="int" role="tabpanel">
           <ul class="news-list" id="news-int">
             <li>
@@ -308,7 +314,7 @@
           </ul>
         </div>
 
-        <!-- 経済タブ -->
+        <!-- 経済 -->
         <div class="panel" data-panel="bus" role="tabpanel">
           <ul class="news-list" id="news-bus">
             <li>
@@ -344,7 +350,7 @@
           </ul>
         </div>
 
-        <!-- エンタメタブ -->
+        <!-- エンタメ -->
         <div class="panel" data-panel="ent" role="tabpanel">
           <ul class="news-list" id="news-ent">
             <li>
@@ -380,7 +386,7 @@
           </ul>
         </div>
 
-        <!-- スポーツタブ -->
+        <!-- スポーツ（タブ内の独自リストはV3側にあるが、ここは見出しのみだったため据え置き） -->
         <div class="panel" data-panel="spo" role="tabpanel">
           <ul class="news-list" id="news-spo">
             <li>
@@ -416,7 +422,7 @@
           </ul>
         </div>
 
-        <!-- ITタブ -->
+        <!-- IT -->
         <div class="panel" data-panel="it" role="tabpanel">
           <ul class="news-list" id="news-it">
             <li>
@@ -451,230 +457,133 @@
             </li>
           </ul>
         </div>
-
       </div>
+
+      <!-- おすすめサービス（ダミー） -->
+      <section class="services wrap" aria-label="サービス">
+        <div class="svc-grid">
+          <div class="svc"><div class="ico">N</div><div><strong>ニュース</strong><div style="font-size:12px;color:var(--ink-2)">話題をまとめ読み</div></div></div>
+          <div class="svc"><div class="ico">W</div><div><strong>天気</strong><div style="font-size:12px;color:var(--ink-2)">全国の空模様（ネタ）</div></div></div>
+          <div class="svc"><div class="ico">S</div><div><strong>スポーツ</strong><div style="font-size:12px;color:var(--ink-2)">異世界ルール</div></div></div>
+          <div class="svc"><div class="ico">F</div><div><strong>ファイナンス</strong><div style="font-size:12px;color:var(--ink-2)">笑顔連動指数</div></div></div>
+          <div class="svc"><div class="ico">M</div><div><strong>メール</strong><div style="font-size:12px;color:var(--ink-2)">未来宛て配送</div></div></div>
+          <div class="svc"><div class="ico">T</div><div><strong>トラベル</strong><div style="font-size:12px;color:var(--ink-2)">時間越境ツアー</div></div></div>
+        </div>
+      </section>
     </section>
 
-    <!-- ページ: 天気 -->
+    <!-- WEATHER -->
     <section id="page-weather" class="page" aria-labelledby="weather-title">
       <div class="card">
-        <h3 id="weather-title">ハチャメチャ全国天気予報 </h3>
+        <h3 id="weather-title">ハチャメチャ全国天気予報</h3>
         <div class="body">
           <div class="weather-grid">
-            <div class="wcell">
-              <h4>北海道</h4>
-              <p>雪ではなくシロクマが降る見込み。交通機関に大きな影響が出る恐れがあります。</p>
-              <p class="note">対策：屋外ではクマよけの鈴よりも魚肉ソーセージの備蓄をおすすめします。避難所では暖かい毛布とホットミルクを用意してください。</p>
-            </div>
-            <div class="wcell">
-              <h4>青森</h4>
-              <p>りんご型の雹が落下します。大小さまざまな形のりんごが地面を彩るでしょう。収穫シーズンには朗報か災難かで議論になります。</p>
-              <p class="note">対策：屋外の車や農作物はネットやカバーで保護してください。落ちたりんご型雹は食用に適するか農協の判断を仰いでください。</p>
-            </div>
-            <div class="wcell">
-              <h4>東京</h4>
-              <p>お昼から巨大なWi-Fi電波が空を覆う予報。電波は強くスマホの接続は快適になりますが、電磁的な干渉で一部電子傘（デジタル傘）が誤作動する恐れがあり、傘の携帯を推奨します。</p>
-              <p class="note">対策：予備バッテリーよりも金属製の傘や帽子が安心です。屋外イベントは電波利用の整理を。</p>
-            </div>
-            <div class="wcell">
-              <h4>名古屋</h4>
-              <p>みそカツの香りを伴う熱風が流れ込みます。夕方にはソースのにわか雨が予想され、道行く人々は一時的に美味しそうな香りに包まれるでしょう。</p>
-              <p class="note">対策：洋服に匂いが付きやすいので予備のシャツやエプロンがあると安心です。食欲増進に注意。</p>
-            </div>
-            <div class="wcell">
-              <h4>大阪</h4>
-              <p>突発的に「たこ焼きの粉雪」が降る予報。道頓堀周辺では粉まみれの観光客が続出し、歩行が難しくなる地域があります。</p>
-              <p class="note">対策：口や目に粉が入らないようマスク、ゴーグルを準備。粉は食品由来である場合が多く、清掃は市の指示に従ってください。</p>
-            </div>
-            <div class="wcell">
-              <h4>京都</h4>
-              <p>金閣寺の屋根が太陽光を強く反射し、周辺で“金色のゲリラ豪雨”が発生する模様。光の反射が水滴に屈折して一帯がキラキラ輝きます。</p>
-              <p class="note">対策：サングラスや反射対策の帽子を用意。光が強い時間帯は屋外活動を控えるのが無難です。</p>
-            </div>
-            <div class="wcell">
-              <h4>福岡</h4>
-              <p>屋台ラーメンのスープ前線が停滞し、午後は替え玉の吹雪に注意。通行人がスープに遭遇する率が上がります。</p>
-              <p class="note">対策：替え玉対策としてタオルや替えの下着を携行すると安心。屋台運営者は蓋付きの容器で対応を。</p>
-            </div>
-            <div class="wcell">
-              <h4>鹿児島</h4>
-              <p>桜島の火山灰が突如カラフルな紙吹雪に変化。通りは祭りのようなお祝いムードに包まれる見込みです。</p>
-              <p class="note">対策：紙吹雪は目につまりやすいので眼鏡やマスク着用を推奨。色付きの灰は洗濯で落ちにくい可能性あり。</p>
-            </div>
-            <div class="wcell">
-              <h4>沖縄</h4>
-              <p>サンゴ礁から虹が直接噴出し、観光客は虹シャワーを浴び放題。ビーチは一時的にカラフルなアーチで埋め尽くされます。</p>
-              <p class="note">対策：水中カメラや防水機材を用意して、虹との記念撮影をお楽しみください。サンゴ生態系への影響は短期的に観察が必要です。</p>
-            </div>
+            <div class="wcell"><h4>北海道</h4><p>雪ではなくシロクマが降る見込み。交通機関に大きな影響が出る恐れがあります。</p><p style="font-size:12px;color:var(--ink-2)">対策：屋外ではクマよけの鈴よりも魚肉ソーセージの備蓄をおすすめします。避難所では暖かい毛布とホットミルクを用意してください。</p></div>
+            <div class="wcell"><h4>青森</h4><p>りんご型の雹が落下します。大小さまざまな形のりんごが地面を彩るでしょう。収穫シーズンには朗報か災難かで議論になります。</p><p style="font-size:12px;color:var(--ink-2)">対策：屋外の車や農作物はネットやカバーで保護してください。落ちたりんご型雹は食用に適するか農協の判断を仰いでください。</p></div>
+            <div class="wcell"><h4>東京</h4><p>お昼から巨大なWi-Fi電波が空を覆う予報。電波は強くスマホの接続は快適になりますが、電磁的な干渉で一部電子傘（デジタル傘）が誤作動する恐れがあり、傘の携帯を推奨します。</p><p style="font-size:12px;color:var(--ink-2)">対策：予備バッテリーよりも金属製の傘や帽子が安心です。屋外イベントは電波利用の整理を。</p></div>
+            <div class="wcell"><h4>名古屋</h4><p>みそカツの香りを伴う熱風が流れ込みます。夕方にはソースのにわか雨が予想され、道行く人々は一時的に美味しそうな香りに包まれるでしょう。</p><p style="font-size:12px;color:var(--ink-2)">対策：洋服に匂いが付きやすいので予備のシャツやエプロンがあると安心です。食欲増進に注意。</p></div>
+            <div class="wcell"><h4>大阪</h4><p>突発的に「たこ焼きの粉雪」が降る予報。道頓堀周辺では粉まみれの観光客が続出し、歩行が難しくなる地域があります。</p><p style="font-size:12px;color:var(--ink-2)">対策：口や目に粉が入らないようマスク、ゴーグルを準備。粉は食品由来である場合が多く、清掃は市の指示に従ってください。</p></div>
+            <div class="wcell"><h4>京都</h4><p>金閣寺の屋根が太陽光を強く反射し、周辺で“金色のゲリラ豪雨”が発生する模様。光の反射が水滴に屈折して一帯がキラキラ輝きます。</p><p style="font-size:12px;color:var(--ink-2)">対策：サングラスや反射対策の帽子を用意。光が強い時間帯は屋外活動を控えるのが無難です。</p></div>
+            <div class="wcell"><h4>福岡</h4><p>屋台ラーメンのスープ前線が停滞し、午後は替え玉の吹雪に注意。通行人がスープに遭遇する率が上がります。</p><p style="font-size:12px;color:var(--ink-2)">対策：替え玉対策としてタオルや替えの下着を携行すると安心。屋台運営者は蓋付きの容器で対応を。</p></div>
+            <div class="wcell"><h4>鹿児島</h4><p>桜島の火山灰が突如カラフルな紙吹雪に変化。通りは祭りのようなお祝いムードに包まれる見込みです。</p><p style="font-size:12px;color:var(--ink-2)">対策：紙吹雪は目につまりやすいので眼鏡やマスク着用を推奨。色付きの灰は洗濯で落ちにくい可能性あり。</p></div>
+            <div class="wcell"><h4>沖縄</h4><p>サンゴ礁から虹が直接噴出し、観光客は虹シャワーを浴び放題。ビーチは一時的にカラフルなアーチで埋め尽くされます。</p><p style="font-size:12px;color:var(--ink-2)">対策：水中カメラや防水機材を用意して、虹との記念撮影をお楽しみください。サンゴ生態系への影響は短期的に観察が必要です。</p></div>
           </div>
-          <p style="margin-top:12px;color:#999;">※この天気予報はフィクションです。実際の天候とは関係ありません。現実の気象情報は気象庁など公式発表を参照してください。</p>
+          <p style="margin-top:12px;color:var(--ink-2);font-size:12px">※この天気予報はフィクションです。現実の気象情報は公式発表を参照してください。</p>
         </div>
       </div>
     </section>
 
-    <!-- ページ: スポーツ -->
+    <!-- SPORTS -->
     <section id="page-sports" class="page" aria-labelledby="sports-title">
-      <div class="card">
-        <h3 id="sports-title">スポーツ</h3>
-        <div class="body">
-          <ul class="news-list">
-            <li><div class="news-item"><a href="#">世界選手権で重力ルールが導入、ジャンプは上に飛んだ分だけ減点。</a></div></li>
-            <li><div class="news-item"><a href="#">サッカー日本代表、ゴールが全部透明だったため試合が延長戦で永遠に続く。</a></div></li>
-            <li><div class="news-item"><a href="#">プロ野球でボールが自分でバウンドして捕球不可になり全試合引き分けに。</a></div></li>
-            <li><div class="news-item"><a href="#">五輪に「空中チェス」が追加、選手は同時に空を飛びながら駒を動かす。</a></div></li>
-            <li><div class="news-item"><a href="#">マラソンでコース上に掃除機が出現、選手が全員靴下を吸われる。</a></div></li>
-            <li><div class="news-item"><a href="#">eスポーツ決勝で観客のコントローラーが勝手に操作して優勝者が無効に。</a></div></li>
-          </ul>
-        </div>
-      </div>
+      <div class="card"><h3 id="sports-title">スポーツ</h3><div class="body"><ul class="news-list">
+        <li><div class="news-item"><a href="#">世界選手権で重力ルールが導入、ジャンプは上に飛んだ分だけ減点。</a></div></li>
+        <li><div class="news-item"><a href="#">サッカー日本代表、ゴールが全部透明だったため試合が延長戦で永遠に続く。</a></div></li>
+        <li><div class="news-item"><a href="#">プロ野球でボールが自分でバウンドして捕球不可になり全試合引き分けに。</a></div></li>
+        <li><div class="news-item"><a href="#">五輪に「空中チェス」が追加、選手は同時に空を飛びながら駒を動かす。</a></div></li>
+        <li><div class="news-item"><a href="#">マラソンでコース上に掃除機が出現、選手が全員靴下を吸われる。</a></div></li>
+        <li><div class="news-item"><a href="#">eスポーツ決勝で観客のコントローラーが勝手に操作して優勝者が無効に。</a></div></li>
+      </ul></div></div>
     </section>
 
-    <!-- ページ: ファイナンス -->
+    <!-- FINANCE -->
     <section id="page-finance" class="page" aria-labelledby="finance-title">
-      <div class="card">
-        <h3 id="finance-title">ファイナンス</h3>
-        <div class="body">
-          <ul class="news-list">
-            <li><div class="news-item"><a href="#">日経平均が「マイナスにならない為の法律」で永久上昇。</a></div></li>
-            <li><div class="news-item"><a href="#">銀行が預金を未来に先払いする「逆ローン」サービス開始。</a></div></li>
-            <li><div class="news-item"><a href="#">仮想通貨が突然「空気コイン」として実体化、配当は酸素。</a></div></li>
-            <li><div class="news-item"><a href="#">ATMが金を吐き出す代わりに宝くじの当たり券を出す。</a></div></li>
-            <li><div class="news-item"><a href="#">株主総会で株が笑っているかどうかで議決権が変わるルール導入。</a></div></li>
-            <li><div class="news-item"><a href="#">為替が曜日ごとにランダムに0円にリセットされる「週末ゼロ化」開始。</a></div></li>
-          </ul>
-        </div>
-      </div>
+      <div class="card"><h3 id="finance-title">ファイナンス</h3><div class="body"><ul class="news-list">
+        <li><div class="news-item"><a href="#">日経平均が「マイナスにならない為の法律」で永久上昇。</a></div></li>
+        <li><div class="news-item"><a href="#">銀行が預金を未来に先払いする「逆ローン」サービス開始。</a></div></li>
+        <li><div class="news-item"><a href="#">仮想通貨が突然「空気コイン」として実体化、配当は酸素。</a></div></li>
+        <li><div class="news-item"><a href="#">ATMが金を吐き出す代わりに宝くじの当たり券を出す。</a></div></li>
+        <li><div class="news-item"><a href="#">株主総会で株が笑っているかどうかで議決権が変わるルール導入。</a></div></li>
+        <li><div class="news-item"><a href="#">為替が曜日ごとにランダムに0円にリセットされる「週末ゼロ化」開始。</a></div></li>
+      </ul></div></div>
     </section>
 
-    <!-- ページ: テレビ -->
-    <section id="page-tv" class="page" aria-labelledby="tv-title">
-      <div class="card">
-        <h3 id="tv-title">テレビ</h3>
-        <div class="body">
-          <ul class="news-list">
-            <li><div class="news-item"><a href="#">24時間ニュースチャンネル、放送内容が毎分別の歴史に切り替わる。</a></div></li>
-            <li><div class="news-item"><a href="#">人気ドラマで俳優が毎話入れ替わる「役替わりシーズン」放送決定。</a></div></li>
-            <li><div class="news-item"><a href="#">視聴率が高すぎてテレビ受信機が自己増殖し街中にテレビが溢れる。</a></div></li>
-            <li><div class="news-item"><a href="#">天気予報が実際に未来を変えるスイッチになっており視聴者が操作可。</a></div></li>
-            <li><div class="news-item"><a href="#">CMが視聴者の夢に直接出現して商品を買わせる。</a></div></li>
-            <li><div class="news-item"><a href="#">クイズ番組で答えたら現金ではなく「時間」が減る賞品。</a></div></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ページ: 地図 -->
-    <section id="page-maps" class="page" aria-labelledby="maps-title">
-      <div class="card">
-        <h3 id="maps-title">地図</h3>
-        <div class="body">
-          <ul class="news-list">
-            <li><div class="news-item"><a href="#">最新地図で「北」が毎朝ランダムに変わる仕様にアップデート。</a></div></li>
-            <li><div class="news-item"><a href="#">都市マップに「存在しない通り」が大量表示され、歩くと別世界へ接続。</a></div></li>
-            <li><div class="news-item"><a href="#">コンパス付き地図が自我を持ち、逆方向を指し続ける。</a></div></li>
-            <li><div class="news-item"><a href="#">地図アプリが徒歩ルートで空を飛ぶ道を案内する。</a></div></li>
-            <li><div class="news-item"><a href="#">世界地図の海が消え、国どうしが陸続きに繋がるリマップ。</a></div></li>
-            <li><div class="news-item"><a href="#">地名が全部ユーザーの名前に置き換わる「パーソナル地図」モード。</a></div></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ページ: 路線 -->
-    <section id="page-transit" class="page" aria-labelledby="transit-title">
-      <div class="card">
-        <h3 id="transit-title">路線</h3>
-        <div class="body">
-          <ul class="news-list">
-            <li><div class="news-item"><a href="#">東京メトロが一日だけ「直線のみ運行」を実施、全線が真っ直ぐに伸びる。</a></div></li>
-            <li><div class="news-item"><a href="#">電車が駅に止まる代わりに乗客を瞬間移動させてしまう新システム。</a></div></li>
-            <li><div class="news-item"><a href="#">路線図が立体化してビルを貫通、乗客はエレベーターで乗車する。</a></div></li>
-            <li><div class="news-item"><a href="#">終電が存在しない代わりに「始電」だけが24時間走る路線。</a></div></li>
-            <li><div class="news-item"><a href="#">列車内に時間が巻き戻るコンパートメントがあり、到着時に年齢が変わる。</a></div></li>
-            <li><div class="news-item"><a href="#">切符が紙ではなく「記憶」になり、一度買うとその日の記憶が消える。</a></div></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ページ: メール -->
-    <section id="page-mail" class="page" aria-labelledby="mail-title">
-      <div class="card">
-        <h3 id="mail-title">メール</h3>
-        <div class="body">
-          <ul class="news-list">
-            <li><div class="news-item"><a href="#">受信トレイが物理化して郵便受けから人が出てきてメールを読む。</a></div></li>
-            <li><div class="news-item"><a href="#">迷惑メールが逆に幸運を招くフィルタに分類されるアルゴリズム登場。</a></div></li>
-            <li><div class="news-item"><a href="#">メール送信で相手のメールアドレスではなく「未来の自分」に届く。</a></div></li>
-            <li><div class="news-item"><a href="#">添付ファイルが現実世界に現れてそのまま家具として使える。</a></div></li>
-            <li><div class="news-item"><a href="#">返信ボタンを押すと相手の心の中に直接届くリアルタイム返信。</a></div></li>
-            <li><div class="news-item"><a href="#">受信日時が過去にも未来にも設定でき、時間旅行メールが流行。</a></div></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ページ: ショッピング -->
-    <section id="page-shopping" class="page" aria-labelledby="shopping-title">
-      <div class="card">
-        <h3 id="shopping-title">ショッピング</h3>
-        <div class="body">
-          <ul class="news-list">
-            <li><div class="news-item"><a href="#">商品を買うと店舗ごと消えて別の惑星にワープする「一店一惑星」販売。</a></div></li>
-            <li><div class="news-item"><a href="#">ネット通販で注文した物が注文者の「理想の自分」に変身して届く。</a></div></li>
-            <li><div class="news-item"><a href="#">レビューが実際の商品を変える力を持ち、星1つでサイズが縮む。</a></div></li>
-            <li><div class="news-item"><a href="#">買い物カートに入れたらその場で現金が増える逆マネー効果。</a></div></li>
-            <li><div class="news-item"><a href="#">返品すると世界の一部が巻き戻る「時空返品」サービス。</a></div></li>
-            <li><div class="news-item"><a href="#">店舗で試着すると試着した服が店ごと生態系に変化する。</a></div></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ページ: オークション -->
-    <section id="page-auction" class="page" aria-labelledby="auction-title">
-      <div class="card">
-        <h3 id="auction-title">オークション</h3>
-        <div class="body">
-          <ul class="news-list">
-            <li><div class="news-item"><a href="#">オークションで「時間の一部」を競り落とす商品が登場。</a></div></li>
-            <li><div class="news-item"><a href="#">隕石や月面の石が気軽に出品され、落札者は所有権と引き換えに月の重力を持つ。</a></div></li>
-            <li><div class="news-item"><a href="#">オークション終了と同時に落札物が現実から消える「儚い落札」。</a></div></li>
-            <li><div class="news-item"><a href="#">価格が上がるたびに出品者の年齢が若返る仕組み。</a></div></li>
-            <li><div class="news-item"><a href="#">入札が感情で行われ、盛り上がるほど商品の色が変わる。</a></div></li>
-            <li><div class="news-item"><a href="#">終了直前にオークション会場が空中浮遊してしまう“空中決済”モード。</a></div></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ページ: トラベル -->
-    <section id="page-travel" class="page" aria-labelledby="travel-title">
-      <div class="card">
-        <h3 id="travel-title">トラベル（旅行ネタ）</h3>
-        <div class="body">
-          <ul class="news-list">
-            <li><div class="news-item"><a href="#">タイムトラベルツアー、明日の朝に戻る「一泊で歴史見学」パッケージ発売。</a></div></li>
-            <li><div class="news-item"><a href="#">飛行機で地球を一周すると乗客の影だけが残って帰ってこない。</a></div></li>
-            <li><div class="news-item"><a href="#">観光地が実は移動式で、行くたびに場所が変わるサプライズ旅行。</a></div></li>
-            <li><div class="news-item"><a href="#">ホテルに泊まると滞在中に現実がアップデートされ最新バージョンになる。</a></div></li>
-            <li><div class="news-item"><a href="#">ツアーに参加すると帰りは別の人生を選べる分岐点で降ろされる。</a></div></li>
-            <li><div class="news-item"><a href="#">ガイドが未来から来た自分で、旅行中に自分の未来を観光できる。</a></div></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
+    <!-- その他ページ（ダミーのまま） -->
+    <section id="page-tv" class="page"><div class="card"><h3>テレビ</h3><div class="body"><ul class="news-list">
+      <li><div class="news-item"><a href="#">24時間ニュースチャンネル、放送内容が毎分別の歴史に切り替わる。</a></div></li>
+      <li><div class="news-item"><a href="#">人気ドラマで俳優が毎話入れ替わる「役替わりシーズン」放送決定。</a></div></li>
+      <li><div class="news-item"><a href="#">視聴率が高すぎてテレビ受信機が自己増殖し街中にテレビが溢れる。</a></div></li>
+      <li><div class="news-item"><a href="#">天気予報が実際に未来を変えるスイッチになっており視聴者が操作可。</a></div></li>
+      <li><div class="news-item"><a href="#">CMが視聴者の夢に直接出現して商品を買わせる。</a></div></li>
+      <li><div class="news-item"><a href="#">クイズ番組で答えたら現金ではなく「時間」が減る賞品。</a></div></li>
+    </ul></div></div></section>
+    <section id="page-maps" class="page"><div class="card"><h3>地図</h3><div class="body"><ul class="news-list">
+      <li><div class="news-item"><a href="#">最新地図で「北」が毎朝ランダムに変わる仕様にアップデート。</a></div></li>
+      <li><div class="news-item"><a href="#">都市マップに「存在しない通り」が大量表示され、歩くと別世界へ接続。</a></div></li>
+      <li><div class="news-item"><a href="#">コンパス付き地図が自我を持ち、逆方向を指し続ける。</a></div></li>
+      <li><div class="news-item"><a href="#">地図アプリが徒歩ルートで空を飛ぶ道を案内する。</a></div></li>
+      <li><div class="news-item"><a href="#">世界地図の海が消え、国どうしが陸続きに繋がるリマップ。</a></div></li>
+      <li><div class="news-item"><a href="#">地名が全部ユーザーの名前に置き換わる「パーソナル地図」モード。</a></div></li>
+    </ul></div></div></section>
+    <section id="page-transit" class="page"><div class="card"><h3>路線</h3><div class="body"><ul class="news-list">
+      <li><div class="news-item"><a href="#">東京メトロが一日だけ「直線のみ運行」を実施、全線が真っ直ぐに伸びる。</a></div></li>
+      <li><div class="news-item"><a href="#">電車が駅に止まる代わりに乗客を瞬間移動させてしまう新システム。</a></div></li>
+      <li><div class="news-item"><a href="#">路線図が立体化してビルを貫通、乗客はエレベーターで乗車する。</a></div></li>
+      <li><div class="news-item"><a href="#">終電が存在しない代わりに「始電」だけが24時間走る路線。</a></div></li>
+      <li><div class="news-item"><a href="#">列車内に時間が巻き戻るコンパートメントがあり、到着時に年齢が変わる。</a></div></li>
+      <li><div class="news-item"><a href="#">切符が紙ではなく「記憶」になり、一度買うとその日の記憶が消える。</a></div></li>
+    </ul></div></div></section>
+    <section id="page-mail" class="page"><div class="card"><h3>メール</h3><div class="body"><ul class="news-list">
+      <li><div class="news-item"><a href="#">受信トレイが物理化して郵便受けから人が出てきてメールを読む。</a></div></li>
+      <li><div class="news-item"><a href="#">迷惑メールが逆に幸運を招くフィルタに分類されるアルゴリズム登場。</a></div></li>
+      <li><div class="news-item"><a href="#">メール送信で相手のメールアドレスではなく「未来の自分」に届く。</a></div></li>
+      <li><div class="news-item"><a href="#">添付ファイルが現実世界に現れてそのまま家具として使える。</a></div></li>
+      <li><div class="news-item"><a href="#">返信ボタンを押すと相手の心の中に直接届くリアルタイム返信。</a></div></li>
+      <li><div class="news-item"><a href="#">受信日時が過去にも未来にも設定でき、時間旅行メールが流行。</a></div></li>
+    </ul></div></div></section>
+    <section id="page-shopping" class="page"><div class="card"><h3>ショッピング</h3><div class="body"><ul class="news-list">
+      <li><div class="news-item"><a href="#">商品を買うと店舗ごと消えて別の惑星にワープする「一店一惑星」販売。</a></div></li>
+      <li><div class="news-item"><a href="#">ネット通販で注文した物が注文者の「理想の自分」に変身して届く。</a></div></li>
+      <li><div class="news-item"><a href="#">レビューが実際の商品を変える力を持ち、星1つでサイズが縮む。</a></div></li>
+      <li><div class="news-item"><a href="#">買い物カートに入れたらその場で現金が増える逆マネー効果。</a></div></li>
+      <li><div class="news-item"><a href="#">返品すると世界の一部が巻き戻る「時空返品」サービス。</a></div></li>
+      <li><div class="news-item"><a href="#">店舗で試着すると試着した服が店ごと生態系に変化する。</a></div></li>
+    </ul></div></div></section>
+    <section id="page-auction" class="page"><div class="card"><h3>オークション</h3><div class="body"><ul class="news-list">
+      <li><div class="news-item"><a href="#">オークションで「時間の一部」を競り落とす商品が登場。</a></div></li>
+      <li><div class="news-item"><a href="#">隕石や月面の石が気軽に出品され、落札者は所有権と引き換えに月の重力を持つ。</a></div></li>
+      <li><div class="news-item"><a href="#">オークション終了と同時に落札物が現実から消える「儚い落札」。</a></div></li>
+      <li><div class="news-item"><a href="#">価格が上がるたびに出品者の年齢が若返る仕組み。</a></div></li>
+      <li><div class="news-item"><a href="#">入札が感情で行われ、盛り上がるほど商品の色が変わる。</a></div></li>
+      <li><div class="news-item"><a href="#">終了直前にオークション会場が空中浮遊してしまう“空中決済”モード。</a></div></li>
+    </ul></div></div></section>
+    <section id="page-travel" class="page"><div class="card"><h3>トラベル（旅行ネタ）</h3><div class="body"><ul class="news-list">
+      <li><div class="news-item"><a href="#">タイムトラベルツアー、明日の朝に戻る「一泊で歴史見学」パッケージ発売。</a></div></li>
+      <li><div class="news-item"><a href="#">飛行機で地球を一周すると乗客の影だけが残って帰ってこない。</a></div></li>
+      <li><div class="news-item"><a href="#">観光地が実は移動式で、行くたびに場所が変わるサプライズ旅行。</a></div></li>
+      <li><div class="news-item"><a href="#">ホテルに泊まると滞在中に現実がアップデートされ最新バージョンになる。</a></div></li>
+      <li><div class="news-item"><a href="#">ツアーに参加すると帰りは別の人生を選べる分岐点で降ろされる。</a></div></li>
+      <li><div class="news-item"><a href="#">ガイドが未来から来た自分で、旅行中に自分の未来を観光できる。</a></div></li>
+    </ul></div></div></section>
   </main>
 
   <footer>
-    <div class="legal">© 2025 Yanoo! JAPAN — This is a fan-made site and is not affiliated with Yahoo! Inc. or LY Corporation. All names here are fictitious.
-      <span class="small-note">（ネタ記事です）</span>
-    </div>
+    <div class="legal">© 2025 Yanoo! JAPAN — This is a fan-made parody site and is NOT affiliated with Yahoo! Inc. / LY Corporation.<br>商標・意匠は各権利者に帰属します。</div>
   </footer>
 
+  <button class="theme-toggle" id="themeBtn" aria-label="テーマ切替">🌓</button>
+
   <script>
-    // ニュース：タブ切り替え（ページ内）
+    // タブ切替
     document.querySelectorAll('.tabs button').forEach(btn=>{
       btn.addEventListener('click',()=>{
         document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
@@ -686,7 +595,7 @@
       });
     });
 
-    // シンプルなハッシュルーター
+    // ハッシュルーター
     const routes = ['news','weather','sports','finance','tv','maps','transit','mail','shopping','auction','travel'];
     function showPage(hash){
       const route = (hash || '#news').replace('#','');
@@ -700,6 +609,19 @@
     }
     window.addEventListener('hashchange', ()=>showPage(location.hash));
     document.addEventListener('DOMContentLoaded', ()=>showPage(location.hash));
+
+    // ダーク/ライトの切替（簡易）
+    const btn = document.getElementById('themeBtn');
+    const root = document.documentElement;
+    btn.addEventListener('click',()=>{
+      if(document.body.dataset.theme==='light'){
+        document.body.dataset.theme='dark';
+        root.style.setProperty('--bg','#0b0b12');
+      }else{
+        document.body.dataset.theme='light';
+        root.style.setProperty('--bg','#f7f7fb');
+      }
+    });
   </script>
 </body>
 </html>
